@@ -1,0 +1,21 @@
+Data Synchronization
+
+Incremental Updates
+
+```http
+GET /api/grants/updates?since=2024-01-01T00:00:00Z
+X-API-Key: your-api-key
+
+Response:
+{
+  "updates": [
+    {
+      "grantId": "GR2024001",
+      "operation": "UPDATE",
+      "timestamp": "2024-01-20T14:30:00Z",
+      "changes": ["budget.totalAwardAmount"]
+    }
+  ],
+  "hasMore": false,
+  "nextSince": "2024-01-20T14:30:00Z"
+}
