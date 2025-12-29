@@ -1,0 +1,16 @@
+
+
+
+```yaml
+# OpenAPI Configuration
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.grantready.org/oauth/token
+          scopes:
+            schemas:read: Read schemas
+            templates:generate: Generate templates
+            compliance:check: Check compliance
