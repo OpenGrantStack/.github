@@ -1,0 +1,495 @@
+openapi: 3.0.3
+info:
+  title: GrantReady Cloud API
+  description: Enterprise-grade grant management core services
+  version: 1.0.0
+  contact:
+    name: GrantReady Team
+    email: api@grantready.cloud
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+
+servers:
+  - url: https://api.grantready.cloud/v1
+    description: Production server
+  - url: https://sandbox.api.grantready.cloud/v1
+    description: Sandbox server
+  - url: http://localhost:3000/v1
+    description: Local development server
+
+tags:
+  - name: Authentication
+    description: User authentication and authorization
+  - name: Grants
+    description: Grant lifecycle management
+  - name: Compliance
+    description: Compliance checks and audits
+  - name: Workflows
+    description: Workflow orchestration
+  - name: SDK
+    description: Software development kit endpoints
+
+paths:
+  /auth/login:
+    post:
+      tags: [Authentication]
+      summary: Authenticate user
+      description: Authenticate user with credentials and return JWT token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Successful authentication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+
+  /auth/refresh:
+    post:
+      tags: [Authentication]
+      summary: Refresh authentication token
+      description: Refresh expired JWT token using refresh token
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Token refreshed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+
+  /grants:
+    get:
+      tags: [Grants]
+      summary: List grants
+      description: Retrieve paginated list of available grants
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/LimitParam'
+        - in: query
+          name: status
+          schema:
+            type: string
+            enum: [open, closed, draft]
+          description: Filter by grant status
+      responses:
+        '200':
+          description: List of grants
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GrantListResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+    post:
+      tags: [Grants]
+      summary: Create new grant
+      description: Create a new grant program (admin only)
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GrantCreateRequest'
+      responses:
+        '201':
+          description: Grant created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GrantResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /grants/{grantId}:
+    get:
+      tags: [Grants]
+      summary: Get grant details
+      description: Retrieve detailed information about a specific grant
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: grantId
+          required: true
+          schema:
+            type: string
+          description: Grant identifier
+      responses:
+        '200':
+          description: Grant details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GrantResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+
+  /grants/{grantId}/applications:
+    post:
+      tags: [Grants]
+      summary: Submit grant application
+      description: Submit an application for a specific grant
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: grantId
+          required: true
+          schema:
+            type: string
+          description: Grant identifier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationRequest'
+      responses:
+        '201':
+          description: Application submitted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+
+  /compliance/checks:
+    post:
+      tags: [Compliance]
+      summary: Run compliance check
+      description: Run compliance checks on grant application data
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComplianceCheckRequest'
+      responses:
+        '200':
+          description: Compliance check results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComplianceCheckResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+
+  /workflows/{workflowId}/execute:
+    post:
+      tags: [Workflows]
+      summary: Execute workflow
+      description: Execute a workflow for grant processing
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: workflowId
+          required: true
+          schema:
+            type: string
+          description: Workflow identifier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkflowExecuteRequest'
+      responses:
+        '200':
+          description: Workflow executed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  parameters:
+    PageParam:
+      in: query
+      name: page
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+      description: Page number for pagination
+    LimitParam:
+      in: query
+      name: limit
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+      description: Number of items per page
+
+  responses:
+    BadRequestError:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnauthorizedError:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ForbiddenError:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+
+  schemas:
+    LoginRequest:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+        deviceId:
+          type: string
+          description: Mobile device identifier for session tracking
+
+    AuthResponse:
+      type: object
+      properties:
+        accessToken:
+          type: string
+        refreshToken:
+          type: string
+        expiresIn:
+          type: integer
+        tokenType:
+          type: string
+          default: Bearer
+        user:
+          $ref: '#/components/schemas/UserProfile'
+
+    GrantCreateRequest:
+      type: object
+      required:
+        - title
+        - fundingAmount
+        - deadline
+      properties:
+        title:
+          type: string
+          maxLength: 200
+        description:
+          type: string
+        fundingAmount:
+          type: number
+          minimum: 0
+        currency:
+          type: string
+          default: USD
+        deadline:
+          type: string
+          format: date-time
+        eligibilityCriteria:
+          type: array
+          items:
+            type: string
+        complianceRequirements:
+          type: array
+          items:
+            $ref: '#/components/schemas/ComplianceRequirement'
+
+    GrantResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        status:
+          type: string
+          enum: [draft, open, review, closed]
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        metadata:
+          $ref: '#/components/schemas/GrantMetadata'
+
+    GrantListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/GrantResponse'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+
+    ApplicationRequest:
+      type: object
+      required:
+        - applicantId
+        - data
+      properties:
+        applicantId:
+          type: string
+        data:
+          type: object
+          additionalProperties: true
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
+
+    ComplianceCheckRequest:
+      type: object
+      required:
+        - entityId
+        - entityType
+      properties:
+        entityId:
+          type: string
+        entityType:
+          type: string
+          enum: [application, applicant, grant]
+        checkTypes:
+          type: array
+          items:
+            type: string
+            enum: [sanctions, eligibility, completeness, risk]
+
+    WorkflowExecuteRequest:
+      type: object
+      required:
+        - trigger
+        - entityId
+      properties:
+        trigger:
+          type: string
+        entityId:
+          type: string
+        payload:
+          type: object
+          additionalProperties: true
+
+    UserProfile:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        name:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        organizationId:
+          type: string
+
+    ComplianceRequirement:
+      type: object
+      properties:
+        code:
+          type: string
+        description:
+          type: string
+        required:
+          type: boolean
+
+    Attachment:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        url:
+          type: string
+        uploadedAt:
+          type: string
+          format: date-time
+
+    GrantMetadata:
+      type: object
+      additionalProperties: true
+
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
+        pages:
+          type: integer
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        requestId:
+          type: string
