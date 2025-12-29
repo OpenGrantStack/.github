@@ -1,0 +1,312 @@
+
+Voting Procedures
+
+Steering Committee Votes
+
+· Quorum: 60% of members present
+· Majority: Simple majority for routine decisions
+· Super Majority: 75% for strategic or compliance decisions
+· Abstentions: Counted toward quorum but not toward majority
+
+Working Group Consensus
+
+· Working groups operate on consensus model
+· Formal votes only when consensus cannot be reached
+· Minutes documented for all decisions
+
+Conflict Resolution
+
+Escalation Path
+
+1. Direct Discussion: Parties attempt to resolve directly
+2. Mediation: Neutral third party facilitates discussion
+3. Working Group Review: Relevant working group reviews
+4. Steering Committee: Final appeal to Steering Committee
+
+Principles
+
+· Focus on project goals, not personal positions
+· Respect diverse perspectives and expertise
+· Documentation of all resolution attempts
+· Timely resolution to prevent project delays
+
+Contribution Process
+
+Contributor Levels
+
+Users
+
+· Role: Use the documentation and provide feedback
+· Path: Submit issues, participate in discussions
+
+Contributors
+
+· Role: Submit improvements via pull requests
+· Path: Follow contribution guidelines, receive review
+
+Maintainers
+
+· Role: Review contributions, manage releases
+· Path: Invitation based on consistent quality contributions
+
+Working Group Members
+
+· Role: Specialized expertise in specific areas
+· Path: Application and approval by Steering Committee
+
+Contribution Guidelines
+
+For Documentation
+
+1. Follow style guidelines in CONTRIBUTING.md
+2. Include regulatory references where applicable
+3. Test templates with sample data
+4. Update version numbers and change logs
+
+For Code/Schemas
+
+1. Pass all validation tests
+2. Include comprehensive documentation
+3. Follow security best practices
+4. Maintain backward compatibility where possible
+
+Review Process
+
+1. Initial Review: Within 7 business days
+2. Feedback: Constructive, specific, timely
+3. Revision: Contributor addresses feedback
+4. Approval: Two maintainer approvals required
+5. Merge: Squash merge with descriptive message
+
+Release Management
+
+Versioning Strategy
+
+Semantic Versioning
+
+· MAJOR: Breaking changes, regulatory requirements
+· MINOR: New features, backward-compatible
+· PATCH: Bug fixes, documentation updates
+
+Release Schedule
+
+· Monthly: Patch releases for urgent fixes
+· Quarterly: Minor releases with new features
+· Annual: Major releases with compliance updates
+
+Release Process
+
+Planning Phase (Week 1-2)
+
+· Gather requirements from working groups
+· Prioritize features and fixes
+· Create release milestone in GitHub
+
+Development Phase (Week 3-4)
+
+· Implement planned changes
+· Code review and testing
+· Documentation updates
+
+Quality Assurance (Week 5)
+
+· Schema validation
+· Template testing
+· Compliance verification
+· Security review
+
+Release Preparation (Week 6)
+
+· Final documentation review
+· Version number updates
+· Release notes preparation
+· Communication plan
+
+Release (Week 7)
+
+· Tag release in GitHub
+· Publish release notes
+· Update documentation site
+· Community announcement
+
+Post-Release
+
+· Monitor for issues
+· Gather feedback
+· Plan next release cycle
+
+Compliance and Oversight
+
+Regulatory Compliance
+
+Monitoring
+
+· Weekly: Regulatory news monitoring
+· Monthly: Compliance status review
+· Quarterly: Comprehensive compliance audit
+
+Documentation
+
+· All compliance decisions documented
+· Regulatory impact assessments
+· Audit trail for all changes
+
+Quality Assurance
+
+Standards
+
+· Documentation follows style guide
+· Schemas pass validation tests
+· Examples demonstrate real-world usage
+· Templates are usable and accessible
+
+Review Process
+
+· Peer review for all contributions
+· Automated testing for technical components
+· User testing for templates and documentation
+· Accessibility review for all content
+
+Community Engagement
+
+Communication Channels
+
+Primary Channels
+
+· GitHub Issues: Feature requests, bug reports
+· GitHub Discussions: Community conversations
+· Mailing Lists: Announcements, working group communication
+· Community Calls: Monthly virtual meetings
+
+Transparency
+
+· All meetings have published agendas and minutes
+· Decisions documented in GitHub
+· Roadmap publicly available
+· Regular progress reports
+
+Outreach and Adoption
+
+Government Outreach
+
+· Engagement with federal, state, and local agencies
+· Partnership with grant-making organizations
+· Participation in government working groups
+
+Nonprofit Engagement
+
+· Training and documentation for nonprofits
+· Feedback collection from users
+· Case studies and success stories
+
+Private Sector Collaboration
+
+· Integration with grant management systems
+· Technology partnerships
+· Commercial support options
+
+Financial Governance
+
+Funding Model
+
+Current Funding
+
+· Foundations: Grant funding for development
+· Government: Contract support for compliance work
+· Sponsorships: Corporate sponsors for specific features
+
+Financial Transparency
+
+· Annual financial report
+· Budget publicly available
+· Spending aligned with project goals
+
+Resource Allocation
+
+Priority Areas
+
+1. Compliance: Regulatory updates and verification
+2. Documentation: Template maintenance and improvement
+3. Technology: Schema development and validation
+4. Community: Outreach, training, support
+
+Decision Criteria
+
+· Alignment with project mission
+· Regulatory requirements
+· Community needs and impact
+· Available resources and expertise
+
+Success Metrics
+
+Key Performance Indicators
+
+Adoption Metrics
+
+· Number of organizations using templates
+· Downloads of schemas and documentation
+· Integration with grant management systems
+
+Quality Metrics
+
+· Documentation accuracy score
+· Schema validation pass rate
+· User satisfaction surveys
+
+Community Metrics
+
+· Number of contributors
+· Diversity of stakeholder representation
+· Response time for issues and questions
+
+Compliance Metrics
+
+· Regulatory coverage percentage
+· Audit readiness score
+· Compliance verification success rate
+
+Reporting
+
+· Monthly: Progress against KPIs
+· Quarterly: Comprehensive report to Steering Committee
+· Annual: Public annual report
+
+Amendment Process
+
+Governance Changes
+
+1. Proposal: Any community member may propose changes
+2. Discussion: Minimum 30-day community discussion period
+3. Revision: Working group incorporates feedback
+4. Vote: Steering Committee super-majority (75%) required
+5. Implementation: Updated governance document published
+
+Emergency Procedures
+
+· Security Issues: Immediate response by security team
+· Regulatory Changes: Expedited compliance process
+· Critical Bugs: Emergency patch release process
+
+Appendices
+
+Appendix A: Steering Committee Charter
+
+[Detailed charter document]
+
+Appendix B: Working Group Charters
+
+[Individual working group charters]
+
+Appendix C: Decision Log Template
+
+[Template for documenting decisions]
+
+Appendix D: Meeting Procedures
+
+[Detailed meeting protocols]
+
+---
+
+Governance Version: 1.0.0
+Last Updated: [01/01/2026]
+Next Review: [Date - 01/01/2027]
