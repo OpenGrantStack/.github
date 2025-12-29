@@ -1,0 +1,21 @@
+Bulk Export
+
+```http
+POST /api/export/grants
+Content-Type: application/json
+
+{
+  "format": "jsonl",
+  "filters": {
+    "status": ["active", "awarded"],
+    "updatedAfter": "2024-01-01"
+  },
+  "compression": "gzip"
+}
+
+Response:
+{
+  "exportId": "exp_12345",
+  "status": "processing",
+  "estimatedCompletion": "2024-01-20T15:00:00Z"
+}
