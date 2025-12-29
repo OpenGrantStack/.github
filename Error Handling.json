@@ -1,0 +1,19 @@
+Error Handling
+
+Standard Error Response
+
+```json
+{
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "Grant data validation failed",
+    "details": [
+      {
+        "field": "recipient.uei",
+        "message": "Must match pattern \"^[A-Z0-9]{12}$\"",
+        "value": "INVALID-UEI"
+      }
+    ],
+    "documentation_url": "https://docs.grantready.org/errors/VALIDATION_ERROR"
+  }
+}
