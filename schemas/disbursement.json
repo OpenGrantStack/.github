@@ -1,0 +1,649 @@
+
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://grantready.org/schemas/disbursement/v1.2.0",
+  "title": "Disbursement Data Schema",
+  "description": "Standardized schema for grant fund disbursements, drawdowns, and payment tracking",
+  "type": "object",
+  "required": [
+    "disbursementId",
+    "grantId",
+    "disbursementDate",
+    "amount",
+    "disbursementType",
+    "status"
+  ],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "description": "Schema and document metadata",
+      "properties": {
+        "schemaVersion": {
+          "type": "string",
+          "description": "Version of this schema",
+          "const": "1.2.0"
+        },
+        "createdDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time this disbursement record was created"
+        },
+        "lastModifiedDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time this disbursement record was last modified"
+        },
+        "sourceSystem": {
+          "type": "string",
+          "description": "System that created this record"
+        },
+        "recordId": {
+          "type": "string",
+          "description": "Unique identifier for this disbursement record"
+        }
+      },
+      "required": ["schemaVersion", "createdDate", "recordId"]
+    },
+    "disbursementId": {
+      "type": "string",
+      "description": "Unique identifier for the disbursement"
+    },
+    "grantId": {
+      "type": "string",
+      "description": "Identifier of the grant being funded"
+    },
+    "grantNumber": {
+      "type": "string",
+      "description": "Official grant number from grantor"
+    },
+    "disbursementNumber": {
+      "type": "string",
+      "description": "Sequential disbursement number for this grant"
+    },
+    "disbursementDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date funds were disbursed"
+    },
+    "transactionDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of financial transaction"
+},
+    "amount": {
+      "type": "number",
+      "minimum": 0.01,
+      "description": "Amount disbursed"
+    },
+    "currency": {
+      "type": "string",
+      "description": "Currency of disbursement",
+      "default": "USD",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "disbursementType": {
+      "type": "string",
+      "description": "Type of disbursement",
+      "enum": [
+        "advance_payment",
+        "reimbursement",
+        "working_capital_advance",
+        "letter_of_credit_drawdown",
+        "final_payment",
+        "closeout_payment",
+        "adjustment",
+        "refund"
+      ]
+    },
+    "paymentMethod": {
+      "type": "string",
+      "description": "Method of payment",
+      "enum": [
+        "ach",
+        "wire_transfer",
+        "check",
+        "credit_card",
+        "treasury_check",
+        "electronic_funds_transfer"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "description": "Current status of disbursement",
+      "enum": [
+        "requested",
+        "approved",
+        "processed",
+        "transmitted",
+        "completed",
+        "rejected",
+        "cancelled",
+        "reconciled",
+        "adjusted"
+      ]
+    },
+    "statusHistory": {
+      "type": "array",
+      "description": "History of status changes",
+      "items": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "changedBy": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          }
+        },
+        "required": ["status", "date"]
+      }
+    },
+    "requestDetails": {
+      "type": "object",
+      "description": "Details of the disbursement request",
+      "properties": {
+        "requestDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "requestedBy": {
+          "type": "string"
+        },
+        "purpose": {
+          "type": "string",
+          "description": "Purpose of disbursement request"
+        },
+        "supportingDocumentation": {
+          "type": "array",
+          "description": "Documents supporting the request",
+          "items": {
+            "type": "object",
+            "properties": {
+              "documentId": {
+                "type": "string"
+              },
+              "documentType": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              }
+            },
+            "required": ["documentId", "documentType"]
+          }
+        },
+        "approvedBy": {
+          "type": "string"
+        },
+        "approvalDate": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "financialDetails": {
+      "type": "object",
+      "description": "Financial transaction details",
+      "properties": {
+        "bankAccount": {
+          "type": "object",
+          "description": "Bank account information",
+          "properties": {
+            "accountName": {
+              "type": "string"
+            },
+            "accountNumber": {
+              "type": "string",
+              "description": "Masked account number"
+            },
+            "routingNumber": {
+              "type": "string"
+            },
+            "bankName": {
+              "type": "string"
+            },
+            "accountType": {
+              "type": "string",
+              "enum": ["checking", "savings", "money_market"]
+            }
+          }
+        },
+        "transactionReference": {
+          "type": "string",
+          "description": "Bank or payment system reference number"
+        },
+        "achTraceNumber": {
+          "type": "string",
+          "description": "ACH trace number for electronic transfers"
+        },
+        "checkNumber": {
+          "type": "string",
+          "description": "Check number if payment by check"
+        },
+        "feeAmount": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Transaction fees deducted"
+        },
+        "netAmount": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Amount received after fees"
+        }
+      }
+    },
+    "allocation": {
+      "type": "object",
+      "description": "Allocation of disbursement to budget categories",
+      "properties": {
+        "totalDisbursedToDate": {
+          "type": "number",
+"minimum": 0,
+          "description": "Cumulative amount disbursed for this grant"
+        },
+        "remainingBalance": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Remaining grant funds after this disbursement"
+        },
+        "percentOfAwardDisbursed": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Percentage of total award disbursed"
+        },
+        "categoryAllocations": {
+          "type": "array",
+          "description": "Breakdown by budget category",
+          "items": {
+            "type": "object",
+            "properties": {
+              "category": {
+                "type": "string",
+                "enum": [
+                  "personnel",
+                  "fringe_benefits",
+                  "travel",
+                  "equipment",
+                  "supplies",
+                  "contractual",
+                  "construction",
+                  "other_direct",
+                  "indirect_costs"
+                ]
+              },
+              "amount": {
+                "type": "number",
+                "minimum": 0
+              },
+              "cumulativeAmount": {
+                "type": "number",
+                "minimum": 0
+              },
+              "remainingCategoryBalance": {
+                "type": "number"
+              }
+            },
+            "required": ["category", "amount"]
+          }
+        }
+      }
+    },
+    "complianceDetails": {
+      "type": "object",
+      "description": "Compliance verification details",
+      "properties": {
+        "allowabilityVerification": {
+          "type": "object",
+          "description": "Verification of cost allowability",
+          "properties": {
+            "verifiedBy": {
+              "type": "string"
+            },
+            "verificationDate": {
+              "type": "string",
+              "format": "date"
+            },
+            "verificationMethod": {
+              "type": "string",
+              "enum": ["sampling", "full_review", "system_generated"]
+            },
+            "allowableCosts": {
+"type": "boolean"
+            },
+            "notes": {
+              "type": "string"
+            }
+          }
+        },
+        "timeAndEffortCertification": {
+          "type": "object",
+          "description": "Time and effort certification status",
+          "properties": {
+            "periodCovered": {
+              "$ref": "#/$defs/dateRange"
+            },
+            "certificationComplete": {
+              "type": "boolean"
+            },
+            "certificationDate": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        },
+        "matchVerification": {
+          "type": "object",
+          "description": "Matching fund verification",
+          "properties": {
+            "matchRequirementMet": {
+              "type": "boolean"
+            },
+            "matchAmountThisPeriod": {
+              "type": "number",
+              "minimum": 0
+            },
+            "cumulativeMatchAmount": {
+              "type": "number",
+              "minimum": 0
+            },
+            "matchSource": {
+              "type": "string"
+            }
+          }
+        },
+        "specialConditionCompliance": {
+          "type": "array",
+          "description": "Compliance with special conditions",
+          "items": {
+            "type": "object",
+            "properties": {
+              "conditionId": {
+                "type": "string"
+              },
+              "conditionMet": {
+                "type": "boolean"
+              },
+              "verificationDate": {
+                "type": "string",
+                "format": "date"
+              }
+            },
+            "required": ["conditionId", "conditionMet"]
+          }
+        }
+      }
+    },
+    "reconciliation": {
+      "type": "object",
+      "description": "Reconciliation information",
+"properties": {
+        "reconciledDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "reconciledBy": {
+          "type": "string"
+        },
+        "bankStatementMatch": {
+          "type": "boolean"
+        },
+        "generalLedgerMatch": {
+          "type": "boolean"
+        },
+        "varianceAmount": {
+          "type": "number",
+          "description": "Difference between expected and actual"
+        },
+        "varianceExplanation": {
+          "type": "string"
+        },
+        "correctiveAction": {
+          "type": "string"
+        }
+      }
+    },
+    "relatedDisbursements": {
+      "type": "array",
+      "description": "Related disbursement records",
+      "items": {
+        "type": "object",
+        "properties": {
+          "disbursementId": {
+            "type": "string"
+          },
+          "relationshipType": {
+            "type": "string",
+            "enum": ["adjustment", "correction", "reversal", "supplemental"]
+          },
+          "relatedAmount": {
+            "type": "number"
+          }
+        },
+        "required": ["disbursementId", "relationshipType"]
+      }
+    },
+    "auditInformation": {
+      "type": "object",
+      "description": "Audit trail information",
+      "properties": {
+        "createdBy": {
+          "type": "string"
+        },
+        "modifiedBy": {
+          "type": "string"
+        },
+        "approvalChain": {
+          "type": "array",
+          "description": "Approval chain for this disbursement",
+          "items": {
+            "type": "object",
+            "properties": {
+              "approver": {
+                "type": "string"
+              },
+              "role": {
+                "type": "string"
+              },
+              "approvalDate": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "approvalMethod": {
+                "type": "string",
+                "enum": ["electronic", "manual", "system"]
+              }
+            },
+            "required": ["approver", "approvalDate"]
+          }
+        },
+        "systemLog": {
+          "type": "array",
+          "description": "System activity log",
+          "items": {
+            "type": "object",
+            "properties": {
+              "action": {
+                "type": "string"
+              },
+              "timestamp": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "user": {
+                "type": "string"
+              },
+              "details": {
+                "type": "string"
+              }
+            },
+            "required": ["action", "timestamp"]
+          }
+        }
+      }
+    },
+    "attachments": {
+      "type": "array",
+      "description": "Documents attached to this disbursement",
+      "items": {
+        "type": "object",
+        "properties": {
+          "documentId": {
+            "type": "string"
+          },
+          "documentType": {
+            "type": "string",
+            "enum": [
+              "request_form",
+              "invoice",
+              "receipt",
+              "bank_statement",
+              "approval",
+              "reconciliation",
+              "adjustment_document"
+            ]
+          },
+          "fileName": {
+            "type": "string"
+          },
+          "fileType": {
+            "type": "string"
+          },
+          "uploadDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": ["documentId", "documentType", "fileName", "uploadDate"]
+      }
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes or comments"
+    }
+  },
+  "$defs": {
+    "dateRange": {
+      "type": "object",
+      "properties": {
+        "startDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "required": ["startDate", "endDate"]
+    }
+  },
+  "examples": [
+    {
+      "metadata": {
+        "schemaVersion": "1.2.0",
+        "createdDate": "2024-01-20T14:30:00Z",
+        "lastModifiedDate": "2024-01-21T09:15:00Z",
+        "sourceSystem": "GrantReady Disbursement Module v2.1",
+        "recordId": "disb-2024-001"
+      },
+      "disbursementId": "DISB2024001",
+      "grantId": "GR2024001",
+      "grantNumber": "HHS-2024-ABC-12345",
+      "disbursementNumber": "001",
+      "disbursementDate": "2024-02-15",
+      "transactionDate": "2024-02-14",
+      "amount": 50000,
+      "currency": "USD",
+      "disbursementType": "advance_payment",
+      "paymentMethod": "ach",
+      "status": "completed",
+      "statusHistory": [
+        {
+          "status": "requested",
+          "date": "2024-02-10T10:00:00Z",
+          "changedBy": "jdoe",
+          "notes": "Initial request submitted"
+        },
+        {
+          "status": "approved",
+          "date": "2024-02-12T14:30:00Z",
+          "changedBy": "asmith",
+          "notes": "Approved by program director"
+        }
+      ],
+      "requestDetails": {
+        "requestDate": "2024-02-10",
+        "requestedBy": "John Doe",
+        "purpose": "Q1 program startup costs and personnel",
+        "approvedBy": "Alice Smith",
+        "approvalDate": "2024-02-12"
+      },
+      "financialDetails": {
+        "bankAccount": {
+          "accountName": "Community Health Nonprofit Inc.",
+          "accountNumber": "******1234",
+          "routingNumber": "021000021",
+          "bankName": "National Bank",
+          "accountType": "checking"
+        },
+        "transactionReference": "ACH20240215123456",
+        "achTraceNumber": "123456789012345",
+        "netAmount": 50000
+      },
+      "allocation": {
+        "totalDisbursedToDate": 50000,
+        "remainingBalance": 200000,
+        "percentOfAwardDisbursed": 20,
+        "categoryAllocations": [
+          {
+            "category": "personnel",
+            "amount": 37500,
+            "cumulativeAmount": 37500,
+            "remainingCategoryBalance": 112500
+          },
+          {
+            "category": "supplies",
+            "amount": 12500,
+            "cumulativeAmount": 12500,
+            "remainingCategoryBalance": 12500
+          }
+        ]
+      },
+      "complianceDetails": {
+        "allowabilityVerification": {
+          "verifiedBy": "System",
+          "verificationDate": "2024-02-13",
+          "verificationMethod": "system_generated",
+          "allowableCosts": true,
+          "notes": "Costs within approved budget categories"
+        }
+      },
+      "auditInformation": {
+        "createdBy": "jdoe",
+        "modifiedBy": "asmith",
+        "approvalChain": [
+          {
+            "approver": "Alice Smith",
+            "role": "Program Director",
+            "approvalDate": "2024-02-12T14:30:00Z",
+            "approvalMethod": "electronic"
+          }
+        ]
+      }
+    }
+  ]
+}
+       
