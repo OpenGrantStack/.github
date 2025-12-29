@@ -1,0 +1,1487 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://grantready.org/schemas/grant/v2.0.0",
+  "title": "Grant Data Schema",
+  "description": "Standardized schema for grant metadata, terms, and compliance requirements",
+  "type": "object",
+  "required": [
+    "grantId",
+    "grantNumber",
+    "grantTitle",
+    "grantor",
+    "recipient",
+    "grantPeriod",
+    "budget",
+    "complianceRequirements"
+  ],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "description": "Schema and document metadata",
+      "properties": {
+        "schemaVersion": {
+          "type": "string",
+          "description": "Version of this schema",
+          "const": "2.0.0"
+        },
+        "createdDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time this grant record was created"
+        },
+        "lastModifiedDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time this grant record was last modified"
+        },
+        "sourceSystem": {
+          "type": "string",
+          "description": "System that created this record"
+        },
+        "recordId": {
+          "type": "string",
+          "description": "Unique identifier for this grant record"
+        }
+      },
+      "required": ["schemaVersion", "createdDate", "recordId"]
+    },
+    "grantId": {
+      "type": "string",
+      "description": "Unique identifier for the grant within the recipient's system"
+    },
+    "grantNumber": {
+      "type": "string",
+      "description": "Official grant number assigned by the grantor"
+    },
+    "grantTitle": {
+      "type": "string",
+      "description": "Official title of the grant",
+      "maxLength": 500
+    },
+    "grantDescription": {
+      "type": "string",
+      "description": "Detailed description of the grant purpose and activities"
+    },
+    "grantType": {
+      "type": "string",
+      "description": "Classification of grant type",
+      "enum": [
+        "formula",
+        "discretionary",
+        "cooperative agreement",
+        "contract",
+        "loan",
+        "block",
+        "categorical",
+        "project",
+        "research",
+        "training",
+        "construction",
+        "operating",
+        "capital",
+        "technical assistance",
+        "planning"
+      ]
+    },
+    "fundingSource": {
+      "type": "object",
+      "description": "Source of funding for the grant",
+      "properties": {
+        "agency": {
+          "type": "string",
+          "description": "Funding agency name"
+        },
+        "program": {
+          "type": "string",
+          "description": "Specific program name"
+        },
+        "catalogOfFederalDomesticAssistanceNumber": {
+          "type": "string",
+          "description": "CFDA number if federal funding",
+          "pattern": "^\\d{2}\\.\\d{3}$"
+        },
+        "appropriation": {
+          "type": "string",
+          "description": "Appropriation bill or source"
+        },
+        "fundingYear": {
+          "type": "integer",
+          "description": "Fiscal year of funding"
+        }
+      },
+      "required": ["agency"]
+    },
+    "grantor": {
+      "type": "object",
+      "description": "Entity awarding the grant",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Legal name of grantor"
+        },
+        "uei": {
+          "type": "string",
+          "description": "Unique Entity Identifier",
+          "pattern": "^[A-Z0-9]{12}$"
+        },
+        "duns": {
+          "type": "string",
+          "description": "DUNS number if applicable",
+          "pattern": "^\\d{9}$"
+        },
+        "address": {
+          "$ref": "#/$defs/address"
+        },
+        "contact": {
+          "$ref": "#/$defs/contact"
+        }
+      },
+      "required": ["name"]
+    },
+    "recipient": {
+      "type": "object",
+      "description": "Entity receiving the grant",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Legal name of recipient"
+        },
+        "uei": {
+          "type": "string",
+          "description": "Unique Entity Identifier",
+          "pattern": "^[A-Z0-9]{12}$"
+        },
+        "duns": {
+          "type": "string",
+          "description": "DUNS number if applicable",
+          "pattern": "^\\d{9}$"
+        },
+        "ein": {
+          "type": "string",
+          "description": "Employer Identification Number",
+          "pattern": "^\\d{2}-\\d{7}$"
+        },
+        "organizationType": {
+          "type": "string",
+          "description": "Type of recipient organization",
+          "enum": [
+            "nonprofit",
+            "governmental_state",
+            "governmental_local",
+            "governmental_tribal",
+            "educational",
+            "healthcare",
+            "for_profit",
+            "individual",
+            "other"
+          ]
+        },
+        "address": {
+          "$ref": "#/$defs/address"
+        },
+        "contact": {
+          "$ref": "#/$defs/contact"
+        }
+      },
+      "required": ["name", "uei", "organizationType"]
+    },
+    "grantPeriod": {
+      "type": "object",
+      "description": "Time period for grant performance",
+      "properties": {
+        "startDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Official start date of grant period"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Official end date of grant period"
+        },
+        "periodOfPerformance": {
+          "type": "string",
+          "description": "Total period of performance in months"
+        },
+        "budgetPeriods": {
+          "type": "array",
+          "description": "Breakdown of budget periods if different from overall period",
+          "items": {
+            "type": "object",
+            "properties": {
+              "periodNumber": {
+                "type": "integer",
+                "description": "Budget period number"
+              },
+              "startDate": {
+                "type": "string",
+                "format": "date"
+              },
+              "endDate": {
+                "type": "string",
+                "format": "date"
+              }
+            },
+            "required": ["periodNumber", "startDate", "endDate"]
+          }
+        }
+      },
+      "required": ["startDate", "endDate"]
+    },
+    "budget": {
+      "type": "object",
+      "description": "Grant budget information",
+      "properties": {
+        "totalAwardAmount": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Total amount awarded"
+        },
+        "federalShare": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Federal portion of award"
+        },
+        "nonFederalShare": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Non-federal portion (match)"
+        },
+        "budgetCategories": {
+          "type": "array",
+          "description": "Detailed budget by category",
+          "items": {
+            "type": "object",
+            "properties": {
+              "category": {
+                "type": "string",
+                "enum": [
+                  "personnel",
+                  "fringe_benefits",
+                  "travel",
+                  "equipment",
+                  "supplies",
+                  "contractual",
+                  "construction",
+                  "other_direct",
+                  "indirect_costs"
+                ]
+              },
+              "amount": {
+                "type": "number",
+                "minimum": 0
+              },
+              "description": {
+                "type": "string"
+              }
+            },
+            "required": ["category", "amount"]
+          }
+        },
+        "indirectCostRate": {
+          "type": "object",
+          "description": "Indirect cost rate information",
+          "properties": {
+            "rateType": {
+              "type": "string",
+              "enum": ["negotiated", "de_minimis", "other"]
+            },
+            "rate": {
+              "type": "number",
+              "minimum": 0
+            },
+            "base": {
+              "type": "string",
+              "enum": ["modified_total_direct_costs", "salaries_and_wages", "other"]
+            },
+            "agreementNumber": {
+              "type": "string"
+            },
+            "expirationDate": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        }
+      },
+      "required": ["totalAwardAmount"]
+    },
+    "programInformation": {
+      "type": "object",
+      "description": "Program-specific information",
+      "properties": {
+        "programAreas": {
+          "type": "array",
+          "description": "Program area classifications",
+          "items": {
+            "type": "string"
+          }
+        },
+        "serviceLocations": {
+          "type": "array",
+          "description": "Geographic service locations",
+          "items": {
+            "$ref": "#/$defs/address"
+          }
+        },
+        "targetPopulation": {
+          "type": "object",
+          "description": "Target population demographics",
+          "properties": {
+            "ageGroups": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "incomeLevels": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "specialPopulations": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "estimatedParticipants": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "performanceMeasures": {
+          "type": "array",
+          "description": "Required performance measures",
+          "items": {
+            "type": "object",
+            "properties": {
+              "measureId": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "target": {
+                "type": ["number", "string"]
+              },
+              "frequency": {
+                "type": "string",
+                "enum": ["quarterly", "semi_annual", "annual", "end_of_grant"]
+              }
+            },
+            "required": ["measureId", "description"]
+          }
+        }
+      }
+    },
+    "complianceRequirements": {
+      "type": "object",
+      "description": "Compliance requirements for this grant",
+      "properties": {
+        "cfrPart200": {
+          "type": "boolean",
+          "description": "Subject to 2 CFR Part 200 requirements"
+        },
+        "singleAudit": {
+          "type": "boolean",
+          "description": "Subject to Single Audit Act requirements"
+        },
+        "auditThreshold": {
+          "type": "number",
+          "description": "Expenditure threshold for audit"
+        },
+        "specialConditions": {
+          "type": "array",
+          "description": "Special conditions attached to award",
+          "items": {
+            "type": "string"
+          }
+        },
+        "reportingRequirements": {
+          "type": "object",
+          "description": "Reporting requirements",
+          "properties": {
+            "financialReports": {
+              "type": "string",
+              "enum": ["quarterly", "semi_annual", "annual", "final"]
+            },
+            "performanceReports": {
+              "type": "string",
+              "enum": ["quarterly", "semi_annual", "annual", "final"]
+            },
+            "inventoryReports": {
+              "type": "boolean"
+            },
+            "closeoutReports": {
+              "type": "boolean"
+            }
+          }
+        },
+        "allowedCosts": {
+          "type": "object",
+          "description": "Cost allowability information",
+          "properties": {
+            "equipmentThreshold": {
+              "type": "number",
+              "description": "Equipment capitalization threshold"
+            },
+            "priorApprovalRequired": {
+              "type": "array",
+              "description": "Costs requiring prior approval",
+              "items": {
+                "type": "string",
+                "enum": ["equipment", "international_travel", "participant_support", "subawards", "budget_revisions"]
+              }
+            }
+          }
+        }
+      },
+      "required": ["cfrPart200"]
+    },
+    "subawards": {
+      "type": "array",
+      "description": "Subawards under this grant",
+      "items": {
+        "type": "object",
+        "properties": {
+          "subawardId": {
+            "type": "string"
+          },
+          "subrecipient": {
+            "$ref": "#/$defs/organization"
+          },
+          "amount": {
+            "type": "number",
+            "minimum": 0
+          },
+          "purpose": {
+            "type": "string"
+          },
+          "period": {
+            "$ref": "#/$defs/dateRange"
+          }
+        },
+        "required": ["subawardId", "subrecipient", "amount"]
+      }
+    },
+    "keyDates": {
+      "type": "object",
+      "description": "Important dates for grant management",
+      "properties": {
+        "applicationSubmitted": {
+          "type": "string",
+          "format": "date"
+        },
+        "awardDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "obligationDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "firstDrawdownDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "nextReportingDueDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "closeoutDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "recordRetentionUntil": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "status": {
+      "type": "object",
+      "description": "Current status of the grant",
+      "properties": {
+        "overallStatus": {
+          "type": "string",
+          "enum": [
+            "planning",
+            "applied",
+            "awarded",
+            "active",
+            "suspended",
+            "terminated",
+            "closed",
+            "completed"
+          ]
+        },
+        "financialStatus": {
+          "type": "string",
+          "enum": [
+            "no_drawdowns",
+            "partial_drawdowns",
+            "fully_drawn",
+            "overspent",
+            "under_spent"
+          ]
+        },
+        "programStatus": {
+          "type": "string",
+          "enum": [
+            "not_started",
+            "in_progress",
+            "behind_schedule",
+            "on_track",
+            "completed",
+            "terminated"
+          ]
+        },
+        "complianceStatus": {
+          "type": "string",
+          "enum": ["compliant", "monitoring", "corrective_action", "non_compliant"]
+        },
+        "lastStatusUpdate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["overallStatus", "lastStatusUpdate"]
+    },
+    "attachments": {
+      "type": "array",
+      "description": "Documents attached to this grant record",
+      "items": {
+        "type": "object",
+        "properties": {
+          "documentId": {
+            "type": "string"
+          },
+          "documentType": {
+            "type": "string",
+            "enum": [
+              "application",
+              "award_notice",
+              "budget",
+              "report",
+              "amendment",
+              "correspondence",
+              "audit",
+              "closeout"
+            ]
+          },
+          "fileName": {
+            "type": "string"
+          },
+          "fileType": {
+            "type": "string"
+          },
+          "uploadDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": ["documentId", "documentType", "fileName", "uploadDate"]
+      }
+    }
+  },
+  "$defs": {
+    "address": {
+      "type": "object",
+      "properties": {
+        "street1": {
+          "type": "string"
+        },
+        "street2": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string",
+          "pattern": "^[A-Z]{2}$"
+        },
+        "postalCode": {
+          "type": "string",
+          "pattern": "^\\d{5}(-\\d{4})?$"
+        },
+        "country": {
+          "type": "string",
+          "default": "US"
+        }
+      },
+      "required": ["street1", "city", "state", "postalCode"]
+    },
+    "contact": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "phone": {
+          "type": "string",
+          "pattern": "^\\+?1?\\d{10}$"
+        },
+        "phoneExtension": {
+          "type": "string"
+        }
+      },
+      "required": ["name", "email"]
+    },
+    "organization": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "uei": {
+          "type": "string",
+          "pattern": "^[A-Z0-9]{12}$"
+        },
+        "organizationType": {
+          "type": "string"
+        }
+      },
+      "required": ["name"]
+    },
+    "dateRange": {
+      "type": "object",
+      "properties": {
+        "startDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "required": ["startDate", "endDate"]
+    }
+  },
+  "examples": [
+    {
+      "metadata": {
+        "schemaVersion": "2.0.0",
+        "createdDate": "2024-01-15T10:30:00Z",
+        "lastModifiedDate": "2024-01-15T10:30:00Z",
+        "sourceSystem": "GrantReady v3.2",
+        "recordId": "gr-2024-001"
+      },
+      "grantId": "GR2024001",
+      "grantNumber": "HHS-2024-ABC-12345",
+      "grantTitle": "Community Health Outreach Program",
+      "grantDescription": "Program to provide health education and screening services to underserved communities",
+      "grantType": "discretionary",
+      "fundingSource": {
+        "agency": "Department of Health and Human Services",
+        "program": "Community Health Initiatives",
+        "catalogOfFederalDomesticAssistanceNumber": "93.123",
+        "fundingYear": 2024
+      },
+      "grantor": {
+        "name": "Department of Health and Human Services",
+        "uei": "ABC123DEF456",
+        "contact": {
+          "name": "Jane Smith",
+          "title": "Grants Management Specialist",
+          "email": "jane.smith@hhs.gov",
+          "phone": "2025550123"
+        }
+      },
+      "recipient": {
+        "name": "Community Health Nonprofit Inc.",
+        "uei": "DEF456GHI789",
+        "ein": "12-3456789",
+        "organizationType": "nonprofit",
+        "address": {
+          "street1": "123 Main Street",
+          "city": "Anytown",
+          "state": "CA",
+          "postalCode": "90210"
+        },
+        "contact": {
+          "name": "John Doe",
+          "title": "Executive Director",
+          "email": "john.doe@communityhealth.org",
+          "phone": "3105559876"
+        }
+      },
+      "grantPeriod{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://grantready.org/schemas/grant/v2.0.0",
+  "title": "Grant Data Schema",
+  "description": "Standardized schema for grant metadata, terms, and compliance requirements",
+  "type": "object",
+  "required": [
+    "grantId",
+    "grantNumber",
+    "grantTitle",
+    "grantor",
+    "recipient",
+    "grantPeriod",
+    "budget",
+    "complianceRequirements"
+  ],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "description": "Schema and document metadata",
+      "properties": {
+        "schemaVersion": {
+          "type": "string",
+          "description": "Version of this schema",
+          "const": "2.0.0"
+        },
+        "createdDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time this grant record was created"
+        },
+        "lastModifiedDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time this grant record was last modified"
+        },
+        "sourceSystem": {
+          "type": "string",
+          "description": "System that created this record"
+        },
+        "recordId": {
+          "type": "string",
+          "description": "Unique identifier for this grant record"
+        }
+      },
+      "required": ["schemaVersion", "createdDate", "recordId"]
+    },
+    "grantId": {
+      "type": "string",
+      "description": "Unique identifier for the grant within the recipient's system"
+    },
+    "grantNumber": {
+      "type": "string",
+      "description": "Official grant number assigned by the grantor"
+    },
+    "grantTitle": {
+      "type": "string",
+      "description": "Official title of the grant",
+      "maxLength": 500
+    },
+    "grantDescription": {
+      "type": "string",
+      "description": "Detailed description of the grant purpose and activities"
+    },
+    "grantType": {
+      "type": "string",
+      "description": "Classification of grant type",
+      "enum": [
+        "formula",
+        "discretionary",
+        "cooperative agreement",
+        "contract",
+        "loan",
+        "block",
+        "categorical",
+        "project",
+        "research",
+        "training",
+        "construction",
+        "operating",
+        "capital",
+        "technical assistance",
+        "planning"
+      ]
+    },
+    "fundingSource": {
+      "type": "object",
+      "description": "Source of funding for the grant",
+      "properties": {
+        "agency": {
+          "type": "string",
+          "description": "Funding agency name"
+        },
+        "program": {
+          "type": "string",
+          "description": "Specific program name"
+        },
+        "catalogOfFederalDomesticAssistanceNumber": {
+          "type": "string",
+          "description": "CFDA number if federal funding",
+          "pattern": "^\\d{2}\\.\\d{3}$"
+        },
+        "appropriation": {
+          "type": "string",
+          "description": "Appropriation bill or source"
+        },
+        "fundingYear": {
+          "type": "integer",
+          "description": "Fiscal year of funding"
+        }
+      },
+      "required": ["agency"]
+    },
+    "grantor": {
+      "type": "object",
+      "description": "Entity awarding the grant",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Legal name of grantor"
+        },
+        "uei": {
+          "type": "string",
+          "description": "Unique Entity Identifier",
+          "pattern": "^[A-Z0-9]{12}$"
+        },
+        "duns": {
+          "type": "string",
+          "description": "DUNS number if applicable",
+          "pattern": "^\\d{9}$"
+        },
+        "address": {
+          "$ref": "#/$defs/address"
+        },
+        "contact": {
+          "$ref": "#/$defs/contact"
+        }
+      },
+      "required": ["name"]
+    },
+    "recipient": {
+      "type": "object",
+      "description": "Entity receiving the grant",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Legal name of recipient"
+        },
+        "uei": {
+          "type": "string",
+          "description": "Unique Entity Identifier",
+          "pattern": "^[A-Z0-9]{12}$"
+        },
+        "duns": {
+          "type": "string",
+          "description": "DUNS number if applicable",
+          "pattern": "^\\d{9}$"
+        },
+        "ein": {
+          "type": "string",
+          "description": "Employer Identification Number",
+          "pattern": "^\\d{2}-\\d{7}$"
+        },
+        "organizationType": {
+          "type": "string",
+          "description": "Type of recipient organization",
+          "enum": [
+            "nonprofit",
+            "governmental_state",
+            "governmental_local",
+            "governmental_tribal",
+            "educational",
+            "healthcare",
+            "for_profit",
+            "individual",
+            "other"
+          ]
+        },
+        "address": {
+          "$ref": "#/$defs/address"
+        },
+        "contact": {
+          "$ref": "#/$defs/contact"
+        }
+      },
+      "required": ["name", "uei", "organizationType"]
+    },
+    "grantPeriod": {
+      "type": "object",
+      "description": "Time period for grant performance",
+      "properties": {
+        "startDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Official start date of grant period"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Official end date of grant period"
+        },
+        "periodOfPerformance": {
+          "type": "string",
+          "description": "Total period of performance in months"
+        },
+        "budgetPeriods": {
+          "type": "array",
+          "description": "Breakdown of budget periods if different from overall period",
+          "items": {
+            "type": "object",
+            "properties": {
+              "periodNumber": {
+                "type": "integer",
+                "description": "Budget period number"
+              },
+              "startDate": {
+                "type": "string",
+                "format": "date"
+              },
+              "endDate": {
+                "type": "string",
+                "format": "date"
+              }
+            },
+            "required": ["periodNumber", "startDate", "endDate"]
+          }
+        }
+      },
+      "required": ["startDate", "endDate"]
+    },
+    "budget": {
+      "type": "object",
+      "description": "Grant budget information",
+      "properties": {
+        "totalAwardAmount": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Total amount awarded"
+        },
+        "federalShare": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Federal portion of award"
+        },
+        "nonFederalShare": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Non-federal portion (match)"
+        },
+        "budgetCategories": {
+          "type": "array",
+          "description": "Detailed budget by category",
+          "items": {
+            "type": "object",
+            "properties": {
+              "category": {
+                "type": "string",
+                "enum": [
+                  "personnel",
+                  "fringe_benefits",
+                  "travel",
+                  "equipment",
+                  "supplies",
+                  "contractual",
+                  "construction",
+                  "other_direct",
+                  "indirect_costs"
+                ]
+              },
+              "amount": {
+                "type": "number",
+                "minimum": 0
+              },
+              "description": {
+                "type": "string"
+              }
+            },
+            "required": ["category", "amount"]
+          }
+        },
+        "indirectCostRate": {
+          "type": "object",
+          "description": "Indirect cost rate information",
+          "properties": {
+            "rateType": {
+              "type": "string",
+              "enum": ["negotiated", "de_minimis", "other"]
+            },
+            "rate": {
+              "type": "number",
+              "minimum": 0
+            },
+            "base": {
+              "type": "string",
+              "enum": ["modified_total_direct_costs", "salaries_and_wages", "other"]
+            },
+            "agreementNumber": {
+              "type": "string"
+            },
+            "expirationDate": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        }
+      },
+      "required": ["totalAwardAmount"]
+    },
+    "programInformation": {
+      "type": "object",
+      "description": "Program-specific information",
+      "properties": {
+        "programAreas": {
+          "type": "array",
+          "description": "Program area classifications",
+          "items": {
+            "type": "string"
+          }
+        },
+        "serviceLocations": {
+          "type": "array",
+          "description": "Geographic service locations",
+          "items": {
+            "$ref": "#/$defs/address"
+          }
+        },
+        "targetPopulation": {
+          "type": "object",
+          "description": "Target population demographics",
+          "properties": {
+            "ageGroups": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "incomeLevels": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "specialPopulations": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "estimatedParticipants": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "performanceMeasures": {
+          "type": "array",
+          "description": "Required performance measures",
+          "items": {
+            "type": "object",
+            "properties": {
+              "measureId": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "target": {
+                "type": ["number", "string"]
+              },
+              "frequency": {
+                "type": "string",
+                "enum": ["quarterly", "semi_annual", "annual", "end_of_grant"]
+              }
+            },
+            "required": ["measureId", "description"]
+          }
+        }
+      }
+    },
+    "complianceRequirements": {
+      "type": "object",
+      "description": "Compliance requirements for this grant",
+      "properties": {
+        "cfrPart200": {
+          "type": "boolean",
+          "description": "Subject to 2 CFR Part 200 requirements"
+        },
+        "singleAudit": {
+          "type": "boolean",
+          "description": "Subject to Single Audit Act requirements"
+        },
+        "auditThreshold": {
+          "type": "number",
+          "description": "Expenditure threshold for audit"
+        },
+        "specialConditions": {
+          "type": "array",
+          "description": "Special conditions attached to award",
+          "items": {
+            "type": "string"
+          }
+        },
+        "reportingRequirements": {
+          "type": "object",
+          "description": "Reporting requirements",
+          "properties": {
+            "financialReports": {
+              "type": "string",
+              "enum": ["quarterly", "semi_annual", "annual", "final"]
+            },
+            "performanceReports": {
+              "type": "string",
+              "enum": ["quarterly", "semi_annual", "annual", "final"]
+            },
+            "inventoryReports": {
+              "type": "boolean"
+            },
+            "closeoutReports": {
+              "type": "boolean"
+            }
+          }
+        },
+        "allowedCosts": {
+          "type": "object",
+          "description": "Cost allowability information",
+          "properties": {
+            "equipmentThreshold": {
+              "type": "number",
+              "description": "Equipment capitalization threshold"
+            },
+            "priorApprovalRequired": {
+              "type": "array",
+              "description": "Costs requiring prior approval",
+              "items": {
+                "type": "string",
+                "enum": ["equipment", "international_travel", "participant_support", "subawards", "budget_revisions"]
+              }
+            }
+          }
+        }
+      },
+      "required": ["cfrPart200"]
+    },
+    "subawards": {
+      "type": "array",
+      "description": "Subawards under this grant",
+      "items": {
+        "type": "object",
+        "properties": {
+          "subawardId": {
+            "type": "string"
+          },
+          "subrecipient": {
+            "$ref": "#/$defs/organization"
+          },
+          "amount": {
+            "type": "number",
+            "minimum": 0
+          },
+          "purpose": {
+            "type": "string"
+          },
+          "period": {
+            "$ref": "#/$defs/dateRange"
+          }
+        },
+        "required": ["subawardId", "subrecipient", "amount"]
+      }
+    },
+    "keyDates": {
+      "type": "object",
+      "description": "Important dates for grant management",
+      "properties": {
+        "applicationSubmitted": {
+          "type": "string",
+          "format": "date"
+        },
+        "awardDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "obligationDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "firstDrawdownDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "nextReportingDueDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "closeoutDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "recordRetentionUntil": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "status": {
+      "type": "object",
+      "description": "Current status of the grant",
+      "properties": {
+        "overallStatus": {
+          "type": "string",
+          "enum": [
+            "planning",
+            "applied",
+            "awarded",
+            "active",
+            "suspended",
+            "terminated",
+            "closed",
+            "completed"
+          ]
+        },
+        "financialStatus": {
+          "type": "string",
+          "enum": [
+            "no_drawdowns",
+            "partial_drawdowns",
+            "fully_drawn",
+            "overspent",
+            "under_spent"
+          ]
+        },
+        "programStatus": {
+          "type": "string",
+          "enum": [
+            "not_started",
+            "in_progress",
+            "behind_schedule",
+            "on_track",
+            "completed",
+            "terminated"
+          ]
+        },
+        "complianceStatus": {
+          "type": "string",
+          "enum": ["compliant", "monitoring", "corrective_action", "non_compliant"]
+        },
+        "lastStatusUpdate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["overallStatus", "lastStatusUpdate"]
+    },
+    "attachments": {
+      "type": "array",
+      "description": "Documents attached to this grant record",
+      "items": {
+        "type": "object",
+        "properties": {
+          "documentId": {
+            "type": "string"
+          },
+          "documentType": {
+            "type": "string",
+            "enum": [
+              "application",
+              "award_notice",
+              "budget",
+              "report",
+              "amendment",
+              "correspondence",
+              "audit",
+              "closeout"
+            ]
+          },
+          "fileName": {
+            "type": "string"
+          },
+          "fileType": {
+            "type": "string"
+          },
+          "uploadDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": ["documentId", "documentType", "fileName", "uploadDate"]
+      }
+    }
+  },
+  "$defs": {
+    "address": {
+      "type": "object",
+      "properties": {
+        "street1": {
+          "type": "string"
+        },
+        "street2": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string",
+          "pattern": "^[A-Z]{2}$"
+        },
+        "postalCode": {
+          "type": "string",
+          "pattern": "^\\d{5}(-\\d{4})?$"
+        },
+        "country": {
+          "type": "string",
+          "default": "US"
+        }
+      },
+      "required": ["street1", "city", "state", "postalCode"]
+    },
+    "contact": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "phone": {
+          "type": "string",
+          "pattern": "^\\+?1?\\d{10}$"
+        },
+        "phoneExtension": {
+          "type": "string"
+        }
+      },
+      "required": ["name", "email"]
+    },
+    "organization": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "uei": {
+          "type": "string",
+          "pattern": "^[A-Z0-9]{12}$"
+        },
+        "organizationType": {
+          "type": "string"
+        }
+      },
+      "required": ["name"]
+    },
+    "dateRange": {
+      "type": "object",
+      "properties": {
+        "startDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "required": ["startDate", "endDate"]
+    }
+  },
+  "examples": [
+    {
+      "metadata": {
+        "schemaVersion": "2.0.0",
+        "createdDate": "2024-01-15T10:30:00Z",
+        "lastModifiedDate": "2024-01-15T10:30:00Z",
+        "sourceSystem": "GrantReady v3.2",
+        "recordId": "gr-2024-001"
+      },
+      "grantId": "GR2024001",
+      "grantNumber": "HHS-2024-ABC-12345",
+      "grantTitle": "Community Health Outreach Program",
+      "grantDescription": "Program to provide health education and screening services to underserved communities",
+      "grantType": "discretionary",
+      "fundingSource": {
+        "agency": "Department of Health and Human Services",
+        "program": "Community Health Initiatives",
+        "catalogOfFederalDomesticAssistanceNumber": "93.123",
+        "fundingYear": 2024
+      },
+      "grantor": {
+        "name": "Department of Health and Human Services",
+        "uei": "ABC123DEF456",
+        "contact": {
+          "name": "Jane Smith",
+          "title": "Grants Management Specialist",
+          "email": "jane.smith@hhs.gov",
+          "phone": "2025550123"
+        }
+      },
+      "recipient": {
+        "name": "Community Health Nonprofit Inc.",
+        "uei": "DEF456GHI789",
+        "ein": "12-3456789",
+        "organizationType": "nonprofit",
+        "address": {
+          "street1": "123 Main Street",
+          "city": "Anytown",
+          "state": "CA",
+          "postalCode": "90210"
+        },
+        "contact": {
+          "name": "John Doe",
+          "title": "Executive Director",
+          "email": "john.doe@communityhealth.org",
+          "phone": "3105559876"
+        }
+      },
+      "grantPeriod": {
+        "startDate": "2024-02-01",
+        "endDate": "2025-01-31",
+        "periodOfPerformance": "12 months"
+      },
+      "budget": {
+        "totalAwardAmount": 250000,
+        "federalShare": 200000,
+        "nonFederalShare": 50000,
+        "budgetCategories": [
+          {
+            "category": "personnel",
+            "amount": 150000,
+            "description": "Program staff salaries"
+          },
+          {
+            "category": "supplies",
+            "amount": 25000,
+            "description": "Educational materials and screening supplies"
+          }
+        ]
+      },
+      "complianceRequirements": {
+        "cfrPart200": true,
+        "singleAudit": true,
+        "auditThreshold": 750000,
+        "reportingRequirements": {
+          "financialReports": "quarterly",
+          "performanceReports": "quarterly"
+        }
+      },
+      "status": {
+        "overallStatus": "awarded",
+        "financialStatus": "no_drawdowns",
+        "programStatus": "not_started",
+        "lastStatusUpdate": "2024-01-15T10:30:00Z"
+      }
+    }
+  ]
+}
+
+
+                                  
