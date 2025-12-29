@@ -1,0 +1,493 @@
+
+schemas/audit.json
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://grantready.org/schemas/audit/v1.0.0",
+  "title": "Audit Data Schema",
+  "description": "Standardized schema for grant audit findings, responses, and corrective actions",
+  "type": "object",
+  "required": [
+    "auditId",
+    "grantId",
+    "auditType",
+    "auditPeriod",
+    "findings"
+  ],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "description": "Schema and document metadata",
+      "properties": {
+        "schemaVersion": {
+          "type": "string",
+          "description": "Version of this schema",
+          "const": "1.0.0"
+        },
+        "createdDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time this audit record was created"
+        },
+        "lastModifiedDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time this audit record was last modified"
+        },
+        "sourceSystem": {
+          "type": "string",
+          "description": "System that created this record"
+        },
+        "recordId": {
+          "type": "string",
+          "description": "Unique identifier for this audit record"
+        }
+      },
+      "required": ["schemaVersion", "createdDate", "recordId"]
+    },
+    "auditId": {
+      "type": "string",
+      "description": "Unique identifier for the audit"
+    },
+    "grantId": {
+      "type": "string",
+      "description": "Identifier of the grant being audited"
+    },
+    "grantNumber": {
+      "type": "string",
+      "description": "Official grant number"
+    },
+    "auditType": {
+      "type": "string",
+      "description": "Type of audit conducted",
+      "enum": [
+        "single_audit",
+        "program_specific",
+        "financial",
+        "performance",
+        "compliance",
+        "internal",
+        "quality_assurance",
+        "monitoring"
+      ]
+    },
+    "auditScope": {
+      "type": "object",
+      "description": "Scope and objectives of the audit",
+      "properties": {
+        "objectives": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scopeDescription": {
+          "type": "string"
+        },
+        "periodCovered": {
+          "$ref": "#/$defs/dateRange"
+        },
+        "samplingMethodology": {
+          "type": "string"
+        },
+        "materialityThreshold": {
+          "type": "number"
+        }
+      }
+    },
+    "auditPeriod": {
+      "$ref": "#/$defs/dateRange"
+    },
+    "auditor": {
+      "type": "object",
+      "description": "Auditor information",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "firm": {
+          "type": "string"
+        },
+        "licenseNumber": {
+          "type": "string"
+        },
+        "contact": {
+          "$ref": "#/$defs/contact"
+        }
+      }
+    },
+    "auditee": {
+      "type": "object",
+      "description": "Auditee information",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "contact": {
+          "$ref": "#/$defs/contact"
+        },
+        "preparer": {
+          "type": "string"
+        }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "description": "Audit findings",
+      "items": {
+        "type": "object",
+        "required": ["findingId", "category", "condition", "criteria", "cause", "effect"],
+        "properties": {
+          "findingId": {
+            "type": "string"
+          },
+          "findingNumber": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "financial",
+              "compliance",
+              "performance",
+              "internal_control",
+              "documentation",
+              "procurement",
+              "reporting",
+              "other"
+            ]
+          },
+          "subcategory": {
+            "type": "string"
+          },
+          "condition": {
+            "type": "string",
+            "description": "What was found (the problem)"
+          },
+          "criteria": {
+            "type": "string",
+            "description": "What should have occurred (the standard)"
+          },
+          "cause": {
+            "type": "string",
+            "description": "Why it happened"
+          },
+          "effect": {
+            "type": "string",
+            "description": "Impact or consequence"
+          },
+          "riskLevel": {
+            "type": "string",
+            "enum": ["low", "medium", "high", "significant"]
+          },
+          "questionedCosts": {
+            "type": "number",
+            "minimum": 0
+          },
+          "recommendations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "reference": {
+            "type": "string",
+            "description": "Regulatory or requirement reference"
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "documentId": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "managementResponses": {
+      "type": "array",
+      "description": "Management responses to findings",
+      "items": {
+        "type": "object",
+        "required": ["findingId", "response"],
+        "properties": {
+          "findingId": {
+            "type": "string"
+          },
+          "response": {
+            "type": "string",
+            "description": "Management's response to the finding"
+          },
+          "correctiveActions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "actionId": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "responsibleParty": {
+                  "type": "string"
+                },
+                "dueDate": {
+                  "type": "string",
+                  "format": "date"
+                }
+              }
+            }
+          },
+          "anticipatedCompletionDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "responseDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "respondedBy": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "correctiveActions": {
+      "type": "array",
+      "description": "Corrective action implementation",
+      "items": {
+        "type": "object",
+        "required": ["actionId", "description", "status"],
+        "properties": {
+          "actionId": {
+            "type": "string"
+          },
+          "findingId": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "responsibleParty": {
+            "type": "string"
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "completedDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["not_started", "in_progress", "completed", "verified", "cancelled"]
+          },
+          "verificationMethod": {
+            "type": "string"
+          },
+          "verifiedBy": {
+            "type": "string"
+          },
+          "verificationDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "auditResults": {
+      "type": "object",
+      "description": "Overall audit results",
+      "properties": {
+        "opinion": {
+          "type": "string",
+          "enum": ["unmodified", "qualified", "adverse", "disclaimer"]
+        },
+        "reportDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "totalQuestionedCosts": {
+          "type": "number"
+        },
+        "materialWeaknesses": {
+          "type": "integer"
+        },
+        "significantDeficiencies": {
+          "type": "integer"
+        },
+        "noncomplianceInstances": {
+          "type": "integer"
+        },
+        "summary": {
+          "type": "string"
+        }
+      }
+    },
+    "followUp": {
+      "type": "object",
+      "description": "Follow-up audit information",
+      "properties": {
+        "followUpRequired": {
+          "type": "boolean"
+        },
+        "followUpDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "followUpScope": {
+          "type": "string"
+        },
+        "previousAuditId": {
+          "type": "string"
+        }
+      }
+    },
+    "attachments": {
+      "type": "array",
+      "description": "Audit documentation",
+      "items": {
+        "type": "object",
+        "properties": {
+          "documentId": {
+            "type": "string"
+          },
+          "documentType": {
+            "type": "string",
+            "enum": [
+              "audit_report",
+              "management_letter",
+              "corrective_action_plan",
+              "evidence",
+              "correspondence",
+              "working_papers"
+            ]
+          },
+          "fileName": {
+            "type": "string"
+          },
+          "uploadDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "dateRange": {
+      "type": "object",
+      "properties": {
+        "startDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "required": ["startDate", "endDate"]
+    },
+    "contact": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "phone": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "metadata": {
+        "schemaVersion": "1.0.0",
+        "createdDate": "2024-02-01T09:00:00Z",
+        "lastModifiedDate": "2024-02-15T14:30:00Z",
+        "sourceSystem": "GrantReady Audit Module v1.2",
+        "recordId": "audit-2024-001"
+      },
+      "auditId": "AUD2024001",
+      "grantId": "GR2024001",
+      "grantNumber": "HHS-2024-ABC-12345",
+      "auditType": "program_specific",
+      "auditPeriod": {
+        "startDate": "2024-01-01",
+        "endDate": "2024-12-31"
+      },
+      "auditor": {
+        "name": "Jane Auditor",
+        "firm": "Independent Auditors LLP",
+        "licenseNumber": "CPA-12345",
+        "contact": {
+          "name": "Jane Auditor",
+          "email": "jane@auditors.com",
+          "phone": "2025550123"
+        }
+      },
+      "findings": [
+        {
+          "findingId": "FND-001",
+          "findingNumber": "2024-001",
+          "category": "internal_control",
+          "condition": "Timesheets were not certified by supervisors",
+          "criteria": "2 CFR 200.430 requires after-the-fact certification of time",
+          "cause": "Supervisors not trained on certification requirements",
+          "effect": "Potential unallowable personnel costs",
+          "riskLevel": "medium",
+          "questionedCosts": 15000,
+          "recommendations": [
+            "Implement supervisor training on time certification",
+            "Establish monthly review process"
+          ],
+          "reference": "2 CFR 200.430(i)(2)"
+        }
+      ],
+      "managementResponses": [
+        {
+          "findingId": "FND-001",
+          "response": "Management agrees with finding and will implement corrective actions",
+          "correctiveActions": [
+            {
+              "actionId": "CA-001",
+              "description": "Train supervisors on time certification requirements",
+              "responsibleParty": "HR Director",
+              "dueDate": "2024-03-31"
+            }
+          ],
+          "anticipatedCompletionDate": "2024-03-31",
+          "responseDate": "2024-02-10",
+          "respondedBy": "John Doe"
+        }
+      ],
+      "auditResults": {
+        "opinion": "qualified",
+        "reportDate": "2024-02-15",
+        "totalQuestionedCosts": 15000,
+        "materialWeaknesses": 0,
+        "significantDeficiencies": 1,
+        "summary": "One significant deficiency noted in timekeeping controls"
+      }
+    }
+  ]
+}
