@@ -1,0 +1,36 @@
+
+Security Considerations
+
+Data Encryption
+
+· All data in transit encrypted with TLS 1.3
+· Data at rest encrypted with AES-256
+· API keys encrypted in database
+
+Audit Logging
+
+All API requests are logged with:
+
+· Timestamp
+· IP address
+· User/API key
+· Endpoint
+· Request/response metadata
+· Compliance classification
+
+Data Retention
+
+· Access logs: 7 years
+· API request logs: 3 years
+· User data: Until deletion request
+· Compliance data: As required by regulation
+
+Performance
+
+Caching Headers
+
+```http
+GET /api/schemas/grant
+Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+ETag: "abc123"
+Last-Modified: Mon, 15 Jan 2024 10:30:00 GMT
