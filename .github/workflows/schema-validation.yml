@@ -1,0 +1,43 @@
+
+
+```yaml
+name: Schema Validation
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'schemas/**'
+      - 'examples/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'schemas/**'
+      - 'examples/**'
+
+jobs:
+  validate-schemas:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Validate JSON Schemas
+      run: |
+        npm run validate:schemas
+        
+    - name: Validate against examples
+      run: |
+        npm run validate:against-examples
+        
+    - name: Generate schema documentation
+      run: |
+        npm run docs:schemas
