@@ -1,0 +1,69 @@
+
+package.json
+
+```json
+{
+  "name": "grantready-docs",
+  "version": "1.0.0",
+  "description": "Grant documentation templates, compliance frameworks, and audit-ready schemas",
+  "main": "index.js",
+  "scripts": {
+    "validate:schemas": "node scripts/validate-schemas.js",
+    "validate:examples": "node scripts/validate-schemas.js --examples",
+    "validate:markdown": "markdownlint '**/*.md' --ignore node_modules",
+    "check:links": "markdown-link-check '**/*.md' --config .markdown-link-check.json",
+    "docs:generate": "node scripts/generate-docs.js",
+    "docs:serve": "docsify serve .",
+    "test": "npm run validate:schemas && npm run validate:examples",
+    "precommit": "npm run validate:schemas && npm run validate:markdown",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grantready/grantready-docs.git"
+  },
+  "keywords": [
+    "grants",
+    "compliance",
+    "documentation",
+    "templates",
+    "schemas",
+    "audit",
+    "government",
+    "nonprofit"
+  ],
+  "author": "GrantReady Team",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/grantready/grantready-docs/issues"
+  },
+  "homepage": "https://github.com/grantready/grantready-docs#readme",
+  "devDependencies": {
+    "ajv": "^8.12.0",
+    "ajv-formats": "^2.1.1",
+    "handlebars": "^4.7.8",
+    "husky": "^8.0.3",
+    "js-yaml": "^4.1.0",
+    "marked": "^9.1.6",
+    "markdown-link-check": "^3.12.0",
+    "markdownlint-cli": "^0.35.0",
+    "prettier": "^3.0.3"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "files": [
+    "docs/",
+    "templates/",
+    "schemas/",
+    "examples/",
+    "scripts/",
+    "LICENSE",
+    "README.md",
+    "CONTRIBUTING.md",
+    "CODE_OF_CONDUCT.md",
+    "SECURITY.md",
+    "GOVERNANCE.md"
+  ]
+}
