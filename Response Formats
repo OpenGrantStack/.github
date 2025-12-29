@@ -1,0 +1,36 @@
+
+Response Formats
+
+· PDF: For printing and signatures
+· DOCX: For editing in word processors
+· HTML: For web display
+· JSON: For data exchange
+
+3. Compliance API
+
+Compliance Check Endpoint
+
+```http
+POST /api/compliance/check
+Content-Type: application/json
+
+{
+  "grantData": { ... },
+  "jurisdiction": "US_FEDERAL",
+  "grantType": "discretionary",
+  "checkTypes": ["financial", "programmatic", "administrative"]
+}
+
+Response:
+{
+  "compliant": true,
+  "warnings": [],
+  "requirements": [
+    {
+      "id": "2CFR200.300",
+      "description": "Financial management system requirements",
+      "status": "compliant",
+      "evidence": "system_audit_report_2024.pdf"
+    }
+  ]
+}
