@@ -1,0 +1,25 @@
+Common Error Codes
+
+Code HTTP Status Description
+INVALID_SCHEMA 400 Request data doesn't match schema
+TEMPLATE_NOT_FOUND 404 Requested template doesn't exist
+RATE_LIMITED 429 Rate limit exceeded
+COMPLIANCE_CHECK_FAILED 422 Compliance requirements not met
+
+Webhooks
+
+Subscription
+
+```http
+POST /api/webhooks
+Content-Type: application/json
+
+{
+  "url": "https://your-system.com/webhooks/grantready",
+  "events": [
+    "schema.updated",
+    "compliance.regulation_changed",
+    "template.new_version"
+  ],
+  "secret": "your-webhook-secret"
+}
