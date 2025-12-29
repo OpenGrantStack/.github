@@ -1,0 +1,200 @@
+
+examples/audit-example.json
+
+```json
+{
+  "metadata": {
+    "schemaVersion": "1.0.0",
+    "createdDate": "2025-03-15T10:00:00Z",
+    "lastModifiedDate": "2025-03-20T14:30:00Z",
+    "sourceSystem": "GrantReady Audit Module v1.3",
+    "recordId": "audit-ex-2025-001"
+  },
+  "auditId": "AUD2025001",
+  "grantId": "GR2024ED001",
+  "grantNumber": "ED-GRANT-2024-12345",
+  "auditType": "single_audit",
+  "auditScope": {
+    "objectives": [
+      "Determine if federal funds were used in compliance with laws and regulations",
+      "Evaluate effectiveness of internal controls over federal programs",
+      "Assess whether the grantee's financial statements are fairly presented"
+    ],
+    "scopeDescription": "Audit of Metropolitan Educational District's federal awards for fiscal year ending June 30, 2024, with emphasis on the STEM Education Enhancement Program",
+    "periodCovered": {
+      "startDate": "2023-07-01",
+      "endDate": "2024-06-30"
+    },
+    "samplingMethodology": "Statistical sampling with 95% confidence level and 5% tolerable error rate",
+    "materialityThreshold": 75000
+  },
+  "auditPeriod": {
+    "startDate": "2024-10-01",
+    "endDate": "2025-03-15"
+  },
+  "auditor": {
+    "name": "Jane Wilson, CPA",
+    "firm": "Anderson & Associates, LLP",
+    "licenseNumber": "CPA-IL-12345",
+    "contact": {
+      "name": "Jane Wilson",
+      "email": "jwilson@andersonaudit.com",
+      "phone": "3125550300"
+    }
+  },
+  "auditee": {
+    "name": "Metropolitan Educational District",
+    "contact": {
+      "name": "Michael Rodriguez",
+      "email": "mrodriguez@metroed.org",
+      "phone": "2175550200"
+    },
+    "preparer": "Janet Wilson, CFO"
+  },
+  "findings": [
+    {
+      "findingId": "FND-2025-001",
+      "findingNumber": "2025-001",
+      "category": "internal_control",
+      "subcategory": "timekeeping",
+      "condition": "Timesheets for grant-funded personnel were not certified by supervisors for the period July-September 2024",
+      "criteria": "2 CFR 200.430(i)(2) requires after-the-fact certifications that employees worked on specific activities",
+      "cause": "Supervisors were not trained on certification requirements and the electronic timekeeping system did not enforce certification before payroll processing",
+      "effect": "Inability to ensure that federal funds were used only for allowable activities; potential unallowable costs of $45,000",
+      "riskLevel": "significant",
+      "questionedCosts": 45000,
+      "recommendations": [
+        "Implement mandatory supervisor training on time certification requirements",
+        "Configure timekeeping system to require certification before payroll processing",
+        "Establish monthly monitoring of certification compliance"
+      ],
+      "reference": "2 CFR 200.430(i)(2)",
+      "evidence": [
+        {
+          "documentId": "EVD-001",
+          "description": "Sample of uncertified timesheets for July-September 2024"
+        },
+        {
+          "documentId": "EVD-002",
+          "description": "Payroll records showing payments without certifications"
+        }
+      ]
+    },
+    {
+      "findingId": "FND-2025-002",
+      "findingNumber": "2025-002",
+      "category": "procurement",
+      "subcategory": "competitive_bidding",
+      "condition": "Purchase of STEM laboratory equipment totaling $85,000 was made without obtaining competitive bids",
+      "criteria": "2 CFR 200.320 requires full and open competition for procurement actions",
+      "cause": "Staff interpreted emergency procurement provisions incorrectly and did not document justification for non-competitive purchase",
+      "effect": "Potential lack of cost-effectiveness in equipment purchase; violation of federal procurement standards",
+      "riskLevel": "medium",
+      "questionedCosts": 0,
+      "recommendations": [
+        "Provide training on federal procurement requirements",
+        "Implement pre-approval process for non-competitive purchases",
+        "Require documented justification for all procurement exceptions"
+      ],
+      "reference": "2 CFR 200.320",
+      "evidence": [
+        {
+          "documentId": "EVD-003",
+          "description": "Purchase order and invoice for equipment"
+        },
+        {
+          "documentId": "EVD-004",
+          "description": "Lack of competitive bidding documentation"
+        }
+      ]
+    }
+  ],
+  "managementResponses": [
+    {
+      "findingId": "FND-2025-001",
+      "response": "Management concurs with the finding. The District acknowledges that supervisor training on time certification was inadequate and system controls were not properly configured. Corrective actions have been planned to address these deficiencies.",
+      "correctiveActions": [
+        {
+          "actionId": "CA-2025-001",
+          "description": "Train all supervisors on time certification requirements",
+          "responsibleParty": "HR Director",
+          "dueDate": "2025-04-30"
+        },
+        {
+          "actionId": "CA-2025-002",
+          "description": "Configure timekeeping system to require certification",
+          "responsibleParty": "IT Director",
+          "dueDate": "2025-05-15"
+        }
+      ],
+      "anticipatedCompletionDate": "2025-05-15",
+      "responseDate": "2025-03-18",
+      "respondedBy": "Michael Rodriguez"
+    },
+    {
+      "findingId": "FND-2025-002",
+      "response": "Management agrees that procurement procedures were not followed correctly. The emergency procurement justification was not properly documented. Revised procedures will be implemented.",
+      "correctiveActions": [
+        {
+          "actionId": "CA-2025-003",
+          "description": "Provide procurement training to all relevant staff",
+          "responsibleParty": "Procurement Director",
+          "dueDate": "2025-04-15"
+        },
+        {
+          "actionId": "CA-2025-004",
+          "description": "Implement documented justification requirement for exceptions",
+          "responsibleParty": "CFO",
+          "dueDate": "2025-04-30"
+        }
+      ],
+      "anticipatedCompletionDate": "2025-04-30",
+      "responseDate": "2025-03-18",
+      "respondedBy": "Janet Wilson"
+    }
+  ],
+  "correctiveActions": [
+    {
+      "actionId": "CA-2025-001",
+      "findingId": "FND-2025-001",
+      "description": "Train all supervisors on time certification requirements",
+      "responsibleParty": "HR Director",
+      "dueDate": "2025-04-30",
+      "completedDate": null,
+      "status": "in_progress",
+      "verificationMethod": "Training attendance records and post-test results",
+      "verifiedBy": null,
+      "verificationDate": null,
+      "notes": "Training schedule developed, sessions to begin April 1"
+    }
+  ],
+  "auditResults": {
+    "opinion": "qualified",
+    "reportDate": "2025-03-15",
+    "totalQuestionedCosts": 45000,
+    "materialWeaknesses": 0,
+    "significantDeficiencies": 1,
+    "noncomplianceInstances": 2,
+    "summary": "Two findings identified: one significant deficiency in timekeeping controls and one procurement noncompliance. Management has responded with appropriate corrective action plans."
+  },
+  "followUp": {
+    "followUpRequired": true,
+    "followUpDate": "2025-09-30",
+    "followUpScope": "Verification of corrective action implementation for both findings",
+    "previousAuditId": null
+  },
+  "attachments": [
+    {
+      "documentId": "ATT-AUD-001",
+      "documentType": "audit_report",
+      "fileName": "Single_Audit_Report_FY2024.pdf",
+      "uploadDate": "2025-03-15T10:00:00Z"
+    },
+    {
+      "documentId": "ATT-AUD-002",
+      "documentType": "management_letter",
+      "fileName": "Management_Letter_FY2024.pdf",
+      "uploadDate": "2025-03-15T10:05:00Z"
+    }
+  ]
+}
