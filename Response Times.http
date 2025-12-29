@@ -1,0 +1,25 @@
+Response Times
+
+Endpoint P95 Response Time Success Rate
+Schema validation < 100ms 99.9%
+Template generation < 2s 99.5%
+Compliance check < 5s 99.0%
+
+Compliance Endpoints
+
+Regulatory Lookup
+
+```http
+GET /api/regulations?jurisdiction=US_FEDERAL&effectiveDate=2024-01-01
+Response:
+{
+  "regulations": [
+    {
+      "id": "2CFR200",
+      "title": "Uniform Administrative Requirements",
+      "effectiveDate": "2024-01-01",
+      "summary": "Requirements for federal grants",
+      "sections": [...]
+    }
+  ]
+}
