@@ -1,0 +1,222 @@
+
+examples/disbursement-example.json
+
+```json
+{
+  "metadata": {
+    "schemaVersion": "1.2.0",
+    "createdDate": "2024-07-15T10:30:00Z",
+    "lastModifiedDate": "2024-07-16T11:45:00Z",
+    "sourceSystem": "GrantReady Financial Module v2.1",
+    "recordId": "disb-ex-2024-001"
+  },
+  "disbursementId": "DISB202407001",
+  "grantId": "GR2024ED001",
+  "grantNumber": "ED-GRANT-2024-12345",
+  "disbursementNumber": "001",
+  "disbursementDate": "2024-07-15",
+  "transactionDate": "2024-07-14",
+  "amount": 150000,
+  "currency": "USD",
+  "disbursementType": "advance_payment",
+  "paymentMethod": "ach",
+  "status": "completed",
+  "statusHistory": [
+    {
+      "status": "requested",
+      "date": "2024-07-10T09:15:00Z",
+      "changedBy": "mrodriguez",
+      "notes": "Initial Q1 advance request submitted"
+    },
+    {
+      "status": "approved",
+      "date": "2024-07-12T14:30:00Z",
+      "changedBy": "sjohnson",
+      "notes": "Approved by program officer"
+    },
+    {
+      "status": "processed",
+      "date": "2024-07-13T11:00:00Z",
+      "changedBy": "system",
+      "notes": "Payment processed by treasury system"
+    },
+    {
+      "status": "completed",
+      "date": "2024-07-15T08:45:00Z",
+      "changedBy": "system",
+      "notes": "Funds deposited successfully"
+    }
+  ],
+  "requestDetails": {
+    "requestDate": "2024-07-10",
+    "requestedBy": "Michael Rodriguez",
+    "purpose": "Q1 program startup costs including personnel, initial equipment purchases, and curriculum development",
+    "supportingDocumentation": [
+      {
+        "documentId": "SUPP-001",
+        "documentType": "budget_narrative",
+        "description": "Detailed Q1 expenditure plan"
+      },
+      {
+        "documentId": "SUPP-002",
+        "documentType": "cash_flow_projections",
+        "description": "12-month cash flow projection"
+      }
+    ],
+    "approvedBy": "Dr. Sarah Johnson",
+    "approvalDate": "2024-07-12"
+  },
+  "financialDetails": {
+    "bankAccount": {
+      "accountName": "Metropolitan Educational District Operating Account",
+      "accountNumber": "******7890",
+      "routingNumber": "021000021",
+      "bankName": "First National Bank of Illinois",
+      "accountType": "checking"
+    },
+    "transactionReference": "ACH20240715123456",
+    "achTraceNumber": "987654321098765",
+    "feeAmount": 0,
+    "netAmount": 150000
+  },
+  "allocation": {
+    "totalDisbursedToDate": 150000,
+    "remainingBalance": 1350000,
+    "percentOfAwardDisbursed": 10,
+    "categoryAllocations": [
+      {
+        "category": "personnel",
+        "amount": 75000,
+        "cumulativeAmount": 75000,
+        "remainingCategoryBalance": 675000
+      },
+      {
+        "category": "fringe_benefits",
+        "amount": 22500,
+        "cumulativeAmount": 22500,
+        "remainingCategoryBalance": 202500
+      },
+      {
+        "category": "equipment",
+        "amount": 30000,
+        "cumulativeAmount": 30000,
+        "remainingCategoryBalance": 170000
+      },
+      {
+        "category": "supplies",
+        "amount": 12500,
+        "cumulativeAmount": 12500,
+        "remainingCategoryBalance": 87500
+      },
+      {
+        "category": "contractual",
+        "amount": 10000,
+        "cumulativeAmount": 10000,
+        "remainingCategoryBalance": 115000
+      }
+    ]
+  },
+  "complianceDetails": {
+    "allowabilityVerification": {
+      "verifiedBy": "System",
+      "verificationDate": "2024-07-11",
+      "verificationMethod": "system_generated",
+      "allowableCosts": true,
+      "notes": "All costs within approved budget categories and thresholds"
+    },
+    "timeAndEffortCertification": {
+      "periodCovered": {
+        "startDate": "2024-07-01",
+        "endDate": "2024-09-30"
+      },
+      "certificationComplete": false,
+      "certificationDate": null
+    },
+    "matchVerification": {
+      "matchRequirementMet": true,
+      "matchAmountThisPeriod": 15000,
+      "cumulativeMatchAmount": 15000,
+      "matchSource": "District General Fund"
+    },
+    "specialConditionCompliance": [
+      {
+        "conditionId": "SC-001",
+        "conditionMet": true,
+        "verificationDate": "2024-07-10"
+      }
+    ]
+  },
+  "reconciliation": {
+    "reconciledDate": "2024-07-16",
+    "reconciledBy": "Janet Wilson",
+    "bankStatementMatch": true,
+    "generalLedgerMatch": true,
+    "varianceAmount": 0,
+    "varianceExplanation": "No variance - exact match",
+    "correctiveAction": "N/A"
+  },
+  "relatedDisbursements": [],
+  "auditInformation": {
+    "createdBy": "mrodriguez",
+    "modifiedBy": "sjohnson",
+    "approvalChain": [
+      {
+        "approver": "Michael Rodriguez",
+        "role": "Superintendent",
+        "approvalDate": "2024-07-10T09:15:00Z",
+        "approvalMethod": "electronic"
+      },
+      {
+        "approver": "Dr. Sarah Johnson",
+        "role": "Grants Management Specialist",
+        "approvalDate": "2024-07-12T14:30:00Z",
+        "approvalMethod": "electronic"
+      },
+      {
+        "approver": "Treasury System",
+        "role": "Automated Approval",
+        "approvalDate": "2024-07-13T11:00:00Z",
+        "approvalMethod": "system"
+      }
+    ],
+    "systemLog": [
+      {
+        "action": "CREATE",
+        "timestamp": "2024-07-10T09:15:00Z",
+        "user": "mrodriguez",
+        "details": "Disbursement request created"
+      },
+      {
+        "action": "APPROVE",
+        "timestamp": "2024-07-12T14:30:00Z",
+        "user": "sjohnson",
+        "details": "Program officer approval"
+      },
+      {
+        "action": "PROCESS",
+        "timestamp": "2024-07-13T11:00:00Z",
+        "user": "system",
+        "details": "Payment processing initiated"
+      }
+    ]
+  },
+  "attachments": [
+    {
+      "documentId": "ATT-001",
+      "documentType": "request_form",
+      "fileName": "Disbursement_Request_Form_Q1.pdf",
+      "fileType": "application/pdf",
+      "uploadDate": "2024-07-10T09:15:00Z",
+      "description": "Signed disbursement request form"
+    },
+    {
+      "documentId": "ATT-002",
+      "documentType": "approval",
+      "fileName": "Approval_Memo_Q1.pdf",
+      "fileType": "application/pdf",
+      "uploadDate": "2024-07-12T14:30:00Z",
+      "description": "Program officer approval memo"
+    }
+  ],
+  "notes": "First quarter advance payment for program startup. All required documentation submitted and approved."
+}
