@@ -1,0 +1,44 @@
+
+
+
+```yaml
+name: Documentation Validation
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 0 * * 0'  # Weekly on Sunday
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Validate Markdown files
+      run: |
+        npm run validate:markdown
+        
+    - name: Check for broken links
+      run: |
+        npm run check:links
+        
+    - name: Validate schema examples
+      run: |
+        npm run validate:examples
+        
+    - name: Run accessibility checks
+      run: |
+        npm run check:accessibility
