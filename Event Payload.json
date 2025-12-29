@@ -1,0 +1,13 @@
+Event Payload
+
+```json
+{
+  "event": "schema.updated",
+  "data": {
+    "schema": "grant",
+    "version": "2.0.0",
+    "changes": ["added property 'statusHistory'"],
+    "timestamp": "2024-01-20T10:30:00Z"
+  },
+  "signature": "sha256=..."
+}
