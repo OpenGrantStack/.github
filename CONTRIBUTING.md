@@ -151,5 +151,23 @@ Contributors will be:
 - Acknowledged in documentation
 - Included in contributor files
 - Recognized for significant contributions
+- 
+Contributing
+
+Contributions are welcome. Please read our Contributing Guidelines and Code of Conduct.
+
+License
+
+Licensed under the Apache License 2.0. See LICENSE for full text.
+
+Security
+
+For security vulnerabilities, please email security@grantready.cloud. See SECURITY.md for more details.
+
+Support
+
+· Documentation: docs.grantready.cloud
+· Community: GitHub Discussions
+· Issues: GitHub Issues
 
 Thank you for supporting transparent and compliant grant management through your contributions.
