@@ -1,0 +1,6 @@
+
+
+```http
+GET /api/schemas/grant
+X-API-Key: your-api-key-here
+Accept: application/json
