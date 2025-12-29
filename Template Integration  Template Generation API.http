@@ -1,0 +1,15 @@
+ 
+```http
+POST /api/templates/generate
+Content-Type: application/json
+Accept: application/pdf
+
+{
+  "template": "grant-application",
+  "data": {
+    "organization": { ... },
+    "program": { ... }
+  },
+  "format": "pdf",
+  "language": "en"
+}
