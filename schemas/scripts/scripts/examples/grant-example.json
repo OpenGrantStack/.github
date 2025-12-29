@@ -1,0 +1,250 @@
+
+examples/grant-example.json
+
+```json
+{
+  "metadata": {
+    "schemaVersion": "2.0.0",
+    "createdDate": "2024-02-15T09:30:00Z",
+    "lastModifiedDate": "2024-02-20T14:15:00Z",
+    "sourceSystem": "GrantReady Platform v3.2",
+    "recordId": "gr-ex-2024-001"
+  },
+  "grantId": "GR2024ED001",
+  "grantNumber": "ED-GRANT-2024-12345",
+  "grantTitle": "STEM Education Enhancement Program for Underserved Communities",
+  "grantDescription": "A comprehensive program to enhance STEM education in Title I schools through teacher training, updated curriculum, and hands-on learning experiences.",
+  "grantType": "discretionary",
+  "fundingSource": {
+    "agency": "U.S. Department of Education",
+    "program": "Education Innovation and Research",
+    "catalogOfFederalDomesticAssistanceNumber": "84.411",
+    "appropriation": "FY2024 Appropriations Act",
+    "fundingYear": 2024
+  },
+  "grantor": {
+    "name": "U.S. Department of Education",
+    "uei": "EDUCATION123",
+    "duns": "123456789",
+    "address": {
+      "street1": "400 Maryland Avenue SW",
+      "city": "Washington",
+      "state": "DC",
+      "postalCode": "20202",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Dr. Sarah Johnson",
+      "title": "Grants Management Specialist",
+      "email": "sarah.johnson@ed.gov",
+      "phone": "2025550100",
+      "phoneExtension": "123"
+    }
+  },
+  "recipient": {
+    "name": "Metropolitan Educational District",
+    "uei": "METROEDU456",
+    "ein": "12-3456789",
+    "organizationType": "governmental_local",
+    "address": {
+      "street1": "123 Education Way",
+      "street2": "Suite 400",
+      "city": "Springfield",
+      "state": "IL",
+      "postalCode": "62701",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Michael Rodriguez",
+      "title": "Superintendent",
+      "email": "mrodriguez@metroed.org",
+      "phone": "2175550200"
+    }
+  },
+  "grantPeriod": {
+    "startDate": "2024-07-01",
+    "endDate": "2027-06-30",
+    "periodOfPerformance": "36 months",
+    "budgetPeriods": [
+      {
+        "periodNumber": 1,
+        "startDate": "2024-07-01",
+        "endDate": "2025-06-30"
+      },
+      {
+        "periodNumber": 2,
+        "startDate": "2025-07-01",
+        "endDate": "2026-06-30"
+      },
+      {
+        "periodNumber": 3,
+        "startDate": "2026-07-01",
+        "endDate": "2027-06-30"
+      }
+    ]
+  },
+  "budget": {
+    "totalAwardAmount": 1500000,
+    "federalShare": 1200000,
+    "nonFederalShare": 300000,
+    "budgetCategories": [
+      {
+        "category": "personnel",
+        "amount": 750000,
+        "description": "Program director, STEM coordinators, and support staff"
+      },
+      {
+        "category": "fringe_benefits",
+        "amount": 225000,
+        "description": "Benefits at 30% of personnel costs"
+      },
+      {
+        "category": "travel",
+        "amount": 75000,
+        "description": "Teacher training travel and conference participation"
+      },
+      {
+        "category": "equipment",
+        "amount": 200000,
+        "description": "STEM laboratory equipment and technology"
+      },
+      {
+        "category": "supplies",
+        "amount": 100000,
+        "description": "Curriculum materials and classroom supplies"
+      },
+      {
+        "category": "contractual",
+        "amount": 125000,
+        "description": "External evaluator and curriculum consultants"
+      },
+      {
+        "category": "other_direct",
+        "amount": 25000,
+        "description": "Professional development materials"
+      }
+    ],
+    "indirectCostRate": {
+      "rateType": "negotiated",
+      "rate": 10,
+      "base": "modified_total_direct_costs",
+      "agreementNumber": "NCR-2023-045",
+      "expirationDate": "2025-12-31"
+    }
+  },
+  "programInformation": {
+    "programAreas": ["STEM Education", "Teacher Development", "Educational Equity"],
+    "serviceLocations": [
+      {
+        "street1": "Central High School",
+        "street2": "456 Learning Lane",
+        "city": "Springfield",
+        "state": "IL",
+        "postalCode": "62702"
+      },
+      {
+        "street1": "Northside Middle School",
+        "street2": "789 Education Drive",
+        "city": "Springfield",
+        "state": "IL",
+        "postalCode": "62703"
+      }
+    ],
+    "targetPopulation": {
+      "ageGroups": ["11-18"],
+      "incomeLevels": ["low_income", "below_poverty"],
+      "specialPopulations": ["title_i_schools", "underserved_communities", "english_learners"],
+      "estimatedParticipants": 1500
+    },
+    "performanceMeasures": [
+      {
+        "measureId": "STEM-001",
+        "description": "Percentage increase in student STEM assessment scores",
+        "target": "15%",
+        "frequency": "annual"
+      },
+      {
+        "measureId": "STEM-002",
+        "description": "Number of teachers trained in new STEM curriculum",
+        "target": 50,
+        "frequency": "annual"
+      },
+      {
+        "measureId": "STEM-003",
+        "description": "Student participation in STEM extracurricular activities",
+        "target": 300,
+        "frequency": "annual"
+      }
+    ]
+  },
+  "complianceRequirements": {
+    "cfrPart200": true,
+    "singleAudit": true,
+    "auditThreshold": 750000,
+    "specialConditions": [
+      "Quarterly progress reports required",
+      "External evaluation component mandatory",
+      "Data sharing agreement with Department of Education"
+    ],
+    "reportingRequirements": {
+      "financialReports": "quarterly",
+      "performanceReports": "quarterly",
+      "inventoryReports": true,
+      "closeoutReports": true
+    },
+    "allowedCosts": {
+      "equipmentThreshold": 5000,
+      "priorApprovalRequired": ["equipment", "international_travel", "subawards"]
+    }
+  },
+  "subawards": [
+    {
+      "subawardId": "SUB-2024-001",
+      "subrecipient": {
+        "name": "STEM Education Consortium",
+        "uei": "STEMCON789",
+        "organizationType": "nonprofit"
+      },
+      "amount": 150000,
+      "purpose": "Curriculum development and teacher training",
+      "period": {
+        "startDate": "2024-09-01",
+        "endDate": "2027-06-30"
+      }
+    }
+  ],
+  "keyDates": {
+    "applicationSubmitted": "2024-01-15",
+    "awardDate": "2024-05-20",
+    "obligationDate": "2024-06-15",
+    "firstDrawdownDate": "2024-07-15",
+    "nextReportingDueDate": "2024-10-31",
+    "closeoutDate": "2027-09-30",
+    "recordRetentionUntil": "2030-09-30"
+  },
+  "status": {
+    "overallStatus": "awarded",
+    "financialStatus": "no_drawdowns",
+    "programStatus": "not_started",
+    "complianceStatus": "compliant",
+    "lastStatusUpdate": "2024-05-20T10:00:00Z"
+  },
+  "attachments": [
+    {
+      "documentId": "DOC-001",
+      "documentType": "application",
+      "fileName": "STEM_Grant_Application_Final.pdf",
+      "fileType": "application/pdf",
+      "uploadDate": "2024-01-15T14:30:00Z",
+      "description": "Full grant application"
+    },
+    {
+      "documentId": "DOC-002",
+      "documentType": "award_notice",
+      "fileName": "Award_Notice_ED12345.pdf",
+      "fileType": "application/pdf",
+      "uploadDate": "2024-05-20T09:00:00Z",
+      "description": "Official award notice"
+    }
+  ]
+}
