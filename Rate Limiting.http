@@ -1,0 +1,16 @@
+Rate Limiting
+
+Limits by Tier
+
+Tier Requests/Minute Burst Monthly Limit
+Free 60 100 10,000
+Basic 300 500 100,000
+Enterprise 1000 2000 Unlimited
+
+Headers
+
+```http
+X-RateLimit-Limit: 60
+X-RateLimit-Remaining: 59
+X-RateLimit-Reset: 1617235200
+Retry-After: 60
