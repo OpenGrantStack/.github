@@ -1,0 +1,7 @@
+Audit Trail Export
+
+```http
+GET /api/audit-trails/grant/{grantId}?format=csv&startDate=2024-01-01
+Response:
+# CSV file with columns:
+# timestamp, user, action, field, old_value, new_value
