@@ -1,0 +1,621 @@
+openapi: 3.0.3
+info:
+  title: GrantReady Hub API
+  description: Centralized mobile collaboration hub for grant teams
+  version: 1.0.0
+  contact:
+    name: GrantReady, Inc.
+    email: api-support@grantready.com
+  license:
+    name: GrantReady Hub License Agreement
+    url: https://grantready.com/license
+servers:
+  - url: https://api.grantready.com/v1
+    description: Production server
+  - url: https://api.staging.grantready.com/v1
+    description: Staging server
+  - url: http://localhost:3000/api/v1
+    description: Local development
+tags:
+  - name: Authentication
+    description: User authentication and session management
+  - name: Users
+    description: User account management
+  - name: Roles
+    description: Role-based access control
+  - name: Approvals
+    description: Approval workflow management
+  - name: Activity
+    description: Activity logging and audit trails
+paths:
+  /auth/login:
+    post:
+      tags: [Authentication]
+      summary: Authenticate user
+      operationId: login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '423':
+          description: Account locked
+  /users/me:
+    get:
+      tags: [Users]
+      summary: Get current user profile
+      operationId: getCurrentUser
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: User profile retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    put:
+      tags: [Users]
+      summary: Update current user profile
+      operationId: updateCurrentUser
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequest'
+      responses:
+        '200':
+          description: User profile updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /roles:
+    get:
+      tags: [Roles]
+      summary: List all roles
+      operationId: listRoles
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: includeUsers
+          in: query
+          schema:
+            type: boolean
+            default: false
+          description: Include user assignments in response
+      responses:
+        '200':
+          description: Roles retrieved
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RoleResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      tags: [Roles]
+      summary: Create a new role
+      operationId: createRole
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRoleRequest'
+      responses:
+        '201':
+          description: Role created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          description: Role already exists
+  /approvals:
+    post:
+      tags: [Approvals]
+      summary: Create a new approval request
+      operationId: createApproval
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateApprovalRequest'
+      responses:
+        '201':
+          description: Approval created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApprovalResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    get:
+      tags: [Approvals]
+      summary: Get user's approvals
+      operationId: getUserApprovals
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [PENDING, IN_REVIEW, APPROVED, REJECTED, CANCELLED, ESCALATED]
+          description: Filter by approval status
+      responses:
+        '200':
+          description: Approvals retrieved
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApprovalResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /approvals/{id}/approve:
+    post:
+      tags: [Approvals]
+      summary: Submit approval decision
+      operationId: submitApprovalDecision
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Approval ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApproveRequest'
+      responses:
+        '200':
+          description: Decision processed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApprovalResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /activity/logs:
+    get:
+      tags: [Activity]
+      summary: Get activity logs
+      operationId: getActivityLogs
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/EntityType'
+        - $ref: '#/components/parameters/EntityId'
+        - $ref: '#/components/parameters/UserId'
+        - $ref: '#/components/parameters/Action'
+        - $ref: '#/components/parameters/StartDate'
+        - $ref: '#/components/parameters/EndDate'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Activity logs retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedActivityLogs'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    EntityType:
+      name: entityType
+      in: query
+      schema:
+        type: string
+      description: Filter by entity type
+    EntityId:
+      name: entityId
+      in: query
+      schema:
+        type: string
+      description: Filter by entity ID
+    UserId:
+      name: userId
+      in: query
+      schema:
+        type: string
+        format: uuid
+      description: Filter by user ID
+    Action:
+      name: action
+      in: query
+      schema:
+        type: string
+      description: Filter by action type
+    StartDate:
+      name: startDate
+      in: query
+      schema:
+        type: string
+        format: date-time
+      description: Start date for filtering
+    EndDate:
+      name: endDate
+      in: query
+      schema:
+        type: string
+        format: date-time
+      description: End date for filtering
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+      description: Page number
+    Limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 50
+      description: Items per page
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        code:
+          type: string
+          description: Error code
+        details:
+          type: object
+          description: Additional error details
+    LoginRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+        mfaCode:
+          type: string
+          description: Multi-factor authentication code
+    LoginResponse:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/UserResponse'
+        token:
+          type: string
+          description: JWT access token
+        requiresMfa:
+          type: boolean
+          description: Whether MFA is required
+        mfaToken:
+          type: string
+          description: Token for MFA setup/verification
+    UserResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+          format: email
+        firstName:
+          type: string
+        lastName:
+          type: string
+        title:
+          type: string
+        department:
+          type: string
+        phone:
+          type: string
+        avatarUrl:
+          type: string
+          format: uri
+        emailVerified:
+          type: boolean
+        mfaEnabled:
+          type: boolean
+        lastLoginAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    UpdateUserRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        title:
+          type: string
+        department:
+          type: string
+        phone:
+          type: string
+        avatarUrl:
+          type: string
+          format: uri
+    RoleResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        description:
+          type: string
+        level:
+          type: integer
+        permissions:
+          type: array
+          items:
+            type: string
+        isSystem:
+          type: boolean
+        userCount:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    CreateRoleRequest:
+      type: object
+      required: [name, permissions]
+      properties:
+        name:
+          type: string
+          minLength: 3
+          maxLength: 50
+        description:
+          type: string
+          maxLength: 500
+        level:
+          type: integer
+          minimum: 0
+          maximum: 1000
+          default: 0
+        permissions:
+          type: array
+          items:
+            type: string
+    CreateApprovalRequest:
+      type: object
+      required: [workflowId, entityId, entityType]
+      properties:
+        workflowId:
+          type: string
+          format: uuid
+        entityId:
+          type: string
+        entityType:
+          type: string
+        dueAt:
+          type: string
+          format: date-time
+        metadata:
+          type: object
+          additionalProperties: true
+    ApprovalResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        workflowId:
+          type: string
+          format: uuid
+        entityId:
+          type: string
+        entityType:
+          type: string
+        currentStage:
+          type: integer
+        status:
+          type: string
+          enum: [PENDING, IN_REVIEW, APPROVED, REJECTED, CANCELLED, ESCALATED]
+        stages:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkflowStage'
+        createdBy:
+          type: string
+        assignedTo:
+          type: array
+          items:
+            type: string
+        approvedBy:
+          type: array
+          items:
+            type: string
+        rejectedBy:
+          type: string
+        decision:
+          type: string
+          enum: [APPROVE, REJECT, REQUEST_CHANGES, ESCALATE]
+        decisionReason:
+          type: string
+        decisionAt:
+          type: string
+          format: date-time
+        dueAt:
+          type: string
+          format: date-time
+        metadata:
+          type: object
+          additionalProperties: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    WorkflowStage:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        approvers:
+          type: array
+          items:
+            type: string
+        minApprovals:
+          type: integer
+        approvalsReceived:
+          type: array
+          items:
+            type: string
+        autoEscalateAfter:
+          type: integer
+        requireSequential:
+          type: boolean
+        status:
+          type: string
+          enum: [pending, in_review, approved, rejected]
+    ApproveRequest:
+      type: object
+      required: [decision]
+      properties:
+        decision:
+          type: string
+          enum: [APPROVE, REJECT, REQUEST_CHANGES, ESCALATE]
+        reason:
+          type: string
+          maxLength: 1000
+        comments:
+          type: string
+          maxLength: 5000
+    ActivityLogResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        action:
+          type: string
+        entityType:
+          type: string
+        entityId:
+          type: string
+        changes:
+          type: object
+          additionalProperties: true
+        userId:
+          type: string
+          format: uuid
+        userName:
+          type: string
+        userAgent:
+          type: string
+        ipAddress:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+    PaginatedActivityLogs:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ActivityLogResponse'
+        pagination:
+          type: object
+          properties:
+            page:
+              type: integer
+            limit:
+              type: integer
+            total:
+              type: integer
+            totalPages:
+              type: integer
+            hasNext:
+              type: boolean
+            hasPrev:
+              type: boolean
