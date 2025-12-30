@@ -1,80 +1,207 @@
-# .github
-# OpenGrantStack
+# GrantReady Hub
 
-OpenGrantStack is an open, modular platform for modern grant infrastructure.
+Enterprise-grade mobile collaboration platform for grant management teams.
 
-We build tools, standards, and governance systems that make grants easier to manage, easier to audit, and harder to misuse — without locking organizations into opaque vendors or fragile workflows.
+## Overview
 
-This ecosystem is designed for:
-- Nonprofits
-- Government agencies
-- Foundations and funders
-- Auditors and compliance teams
-- Developers building grant-enabled platforms
+GrantReady Hub is a centralized SaaS service designed for government agencies, educational institutions, and compliance-driven organizations managing grant programs. The platform enables secure collaboration, approval workflows, and activity tracking across distributed teams.
 
-Our philosophy is simple: **grants should be transparent, auditable, and composable by default.**
+## Key Features
+
+### 🔐 Role-Based Access Control
+Granular permissions system with hierarchical role management designed for multi-agency collaboration.
+
+### 📋 Approval Workflows
+Configurable multi-stage approval processes with parallel review, escalation paths, and audit trails.
+
+### 💬 Contextual Collaboration
+Threaded comments, @mentions, and file annotations with full version history.
+
+### 📱 Mobile-First Design
+Progressive Web App (PWA) with offline capabilities and native mobile application parity.
+
+### 🏛️ Compliance Ready
+Built for government security standards including FedRAMP Moderate, GDPR, and HIPAA compliance.
+
+## Architecture
+
+```
+
+┌─────────────────────────────────────────────┐
+│Mobile Clients               │
+│(PWA, iOS, Android, Desktop)              │
+└─────────────────┬───────────────────────────┘
+│ HTTPS/WebSocket
+┌─────────────────▼───────────────────────────┐
+│API Gateway                    │
+│(Rate Limiting, Request Validation)       │
+└─────────────────┬───────────────────────────┘
+│
+┌─────────────────▼───────────────────────────┐
+│Application Layer                 │
+│• User Management                          │
+│• Role & Permission Engine                 │
+│• Workflow Orchestrator                    │
+│• Activity Logger                          │
+└─────────────────┬───────────────────────────┘
+│
+┌─────────────────▼───────────────────────────┐
+│Data Layer                     │
+│• PostgreSQL (Primary)                     │
+│• Redis (Cache & Sessions)                 │
+│• Elasticsearch (Activity Search)          │
+└─────────────────────────────────────────────┘
+
+```
+
+## Quick Start
+
+### Prerequisites
+
+- Node.js 18+
+- PostgreSQL 14+
+- Redis 6+
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/grantready/hub.git
+cd grantready-hub
+```
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+1. Configure environment:
+
+```bash
+cp .env.example .env
+# Edit .env with your configuration
+```
+
+1. Initialize database:
+
+```bash
+npx prisma migrate deploy
+npm run db:seed
+```
+
+1. Start development server:
+
+```bash
+npm run dev
+```
+
+Docker Deployment
+
+```bash
+docker-compose up -d
+```
+
+Integration Points
+
+Authentication
+
+· OpenID Connect (OIDC)
+· SAML 2.0
+· LDAP/Active Directory
+· API Key Management
+
+Grant Management Systems
+
+· Grants.gov Web Services
+· SAM.gov Entity Management
+· Custom grant system webhooks
+
+Document Storage
+
+· AWS S3 (with GovCloud support)
+· Azure Blob Storage
+· On-premise object storage
+
+Notification Services
+
+· Email (SMTP, SendGrid, Amazon SES)
+· SMS (Twilio, Amazon SNS)
+· Mobile push notifications
+
+API Documentation
+
+Full API documentation available via OpenAPI 3.0:
+
+```bash
+# Start local server with docs
+npm run docs:serve
+```
+
+Access documentation at: http://localhost:3000/api-docs
+
+Development
+
+Project Structure
+
+```
+src/
+├── users/          # User management
+├── roles/          # RBAC implementation
+├── approvals/      # Workflow engine
+└── activity/       # Audit logging
+```
+
+Testing
+
+```bash
+# Unit tests
+npm test
+
+# Integration tests
+npm run test:integration
+
+# End-to-end tests
+npm run test:e2e
+```
+
+Deployment
+
+Cloud Platforms
+
+· AWS (GovCloud compatible)
+· Azure Government
+· Google Cloud Platform
+· On-premise private cloud
+
+Infrastructure as Code
+
+Terraform modules available for:
+
+· AWS CloudFormation
+· Azure Resource Manager
+· Kubernetes Helm Charts
+
+License
+
+This software is available under the GrantReady Hub License Agreement. See LICENSE for details.
+
+For commercial SaaS deployment or government production use, contact licensing@grantready.com.
+
+Support
+
+· Documentation: docs.grantready.com
+· Enterprise Support: support@grantready.com
+· Security Issues: security@grantready.com
+· Community Forum: community.grantready.com
+
+Contributing
+
+Contributions are welcome from authorized partners and customers. Please review CONTRIBUTING.md for guidelines.
 
 ---
 
-## 🌍 What We’re Building
-
-OpenGrantStack is not a single application.  
-It’s a stack — independent components that work alone, but become powerful together.
-
-### Core Pillars
-
-**Grant Operations**
-- Application workflows
-- Compliance enforcement
-- Collaboration and approvals
-- Mobile-first access
-
-**Transparency & Trust**
-- Immutable audit trails
-- Blockchain-based ledgers
-- Grant-specific crypto wallets
-- Evidence-backed compliance
-
-**Analytics & Impact**
-- Progress tracking
-- Outcome measurement
-- Funder-ready reporting
-- Impact metrics
-
-**Governance as Code**
-- Compliance enforced via CI
-- Policy-driven workflows
-- GitHub App–based control plane
-- Audit exports on demand
-
----
-
-## 🧱 Core Repositories
-
-> Each repository is designed to be usable independently and stronger when combined.
-
-### Grant Management & Compliance
-- **GrantReady Cloud** – Core cloud services and SDKs for grant management  
-- **GrantHub Mobile** – Workflow orchestration for grant applications and compliance  
-- **GrantAudit Mobile** – Mobile audit toolkit for compliance and oversight  
-
-### Documentation & Standards
-- **GrantReady Docs** – Grant templates, schemas, and compliance documentation  
-
-### Analytics & Impact
-- **GrantReady Analytics** – Operational analytics and dashboards  
-- **GrantMetrics Mobile** – Impact and outcome measurement  
-
-### AI & Automation
-- **GrantAI Mobile** – AI-assisted grant writing and review (human-in-the-loop)  
-
-### Trust Infrastructure
-- **GrantReady Ledger** – Blockchain-based grant disbursement ledger  
-- **GrantChain Wallet** – Grant-focused crypto wallet with transparent audit trails  
-
-### Governance
-- **GrantReady GitHub App** – Compliance enforcement, repo orchestration, and audit automation  
-
+© 2024 GrantReady, Inc. All rights reserved.
 ---
 
 ## 🧠 Design Principles
