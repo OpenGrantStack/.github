@@ -1,0 +1,234 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User management
+model User {
+  id            String        @id @default(uuid())
+  email         String        @unique
+  emailVerified Boolean       @default(false)
+  passwordHash  String?
+  firstName     String
+  lastName      String
+  title         String?
+  department    String?
+  phone         String?
+  avatarUrl     String?
+  
+  // Authentication
+  mfaEnabled    Boolean       @default(false)
+  mfaSecret     String?
+  lastLoginAt   DateTime?
+  failedLogins  Int           @default(0)
+  lockedUntil   DateTime?
+  
+  // Relationships
+  roleAssignments RoleAssignment[]
+  comments        Comment[]
+  approvals       Approval[]
+  activityLogs    ActivityLog[]
+  
+  // Metadata
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  archivedAt  DateTime?
+  
+  @@index([email])
+  @@index([department])
+}
+
+// Role-Based Access Control
+model Role {
+  id          String        @id @default(uuid())
+  name        String        @unique
+  description String?
+  level       Int           @default(0) // Hierarchy level
+  isSystem    Boolean       @default(false) // System roles cannot be modified
+  
+  // Permissions (stored as JSON for flexibility)
+  permissions Json
+  
+  // Relationships
+  assignments RoleAssignment[]
+  
+  // Metadata
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  
+  @@index([level])
+}
+
+model RoleAssignment {
+  id        String    @id @default(uuid())
+  userId    String
+  roleId    String
+  scope     Json?     // Organizational scope (department, team, etc.)
+  
+  // Relationships
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role      Role      @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  
+  // Metadata
+  assignedAt DateTime  @default(now())
+  assignedBy String?   // User ID of assigner
+  expiresAt  DateTime?
+  
+  @@unique([userId, roleId])
+  @@index([userId])
+  @@index([roleId])
+}
+
+// Approval Workflows
+model ApprovalWorkflow {
+  id              String    @id @default(uuid())
+  name            String
+  description     String?
+  entityType      String    // e.g., "grant_application", "budget", "report"
+  
+  // Workflow definition
+  stages          Json      // Array of approval stages
+  conditions      Json?     // Conditional routing rules
+  escalationRules Json?     // Escalation configuration
+  
+  // Relationships
+  approvals       Approval[]
+  
+  // Metadata
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  createdBy   String
+  
+  @@index([entityType])
+  @@index([isActive])
+}
+
+model Approval {
+  id                String    @id @default(uuid())
+  workflowId        String
+  entityId          String    // ID of the entity being approved
+  entityType        String
+  
+  // Current state
+  currentStage      Int       @default(0)
+  status            ApprovalStatus @default(PENDING)
+  
+  // Participants
+  createdBy         String    // User ID
+  assignedTo        String[]  // Array of user IDs
+  approvedBy        String[]  // Array of user IDs who approved
+  rejectedBy        String?   // User ID who rejected
+  
+  // Decision
+  decision          ApprovalDecision?
+  decisionReason    String?
+  decisionAt        DateTime?
+  
+  // Relationships
+  workflow          ApprovalWorkflow @relation(fields: [workflowId], references: [id])
+  user              User?            @relation(fields: [createdBy], references: [id])
+  comments          Comment[]
+  
+  // Metadata
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  dueAt             DateTime?
+  
+  @@index([workflowId])
+  @@index([entityId, entityType])
+  @@index([status])
+  @@index([createdBy])
+  @@index([dueAt])
+}
+
+enum ApprovalStatus {
+  PENDING
+  IN_REVIEW
+  APPROVED
+  REJECTED
+  CANCELLED
+  ESCALATED
+}
+
+enum ApprovalDecision {
+  APPROVE
+  REJECT
+  REQUEST_CHANGES
+  ESCALATE
+}
+
+// Collaboration
+model Comment {
+  id            String    @id @default(uuid())
+  content       String    @db.Text
+  entityId      String    // ID of the entity being commented on
+  entityType    String    // Type of entity
+  
+  // Author
+  authorId      String
+  author        User      @relation(fields: [authorId], references: [id])
+  
+  // Threading
+  parentId      String?   // For threaded comments
+  replies       Comment[] @relation("CommentReplies")
+  parent        Comment?  @relation("CommentReplies", fields: [parentId], references: [id])
+  
+  // Metadata
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  editedAt      DateTime?
+  isEdited      Boolean   @default(false)
+  
+  @@index([entityId, entityType])
+  @@index([authorId])
+  @@index([parentId])
+  @@index([createdAt])
+}
+
+// Activity Logging
+model ActivityLog {
+  id            String    @id @default(uuid())
+  action        String    // e.g., "create", "update", "delete", "approve"
+  entityType    String
+  entityId      String
+  changes       Json?     // Before/after state for updates
+  
+  // Actor
+  userId        String?
+  user          User?     @relation(fields: [userId], references: [id])
+  userAgent     String?
+  ipAddress     String?
+  
+  // Metadata
+  timestamp     DateTime  @default(now())
+  
+  @@index([userId])
+  @@index([entityType, entityId])
+  @@index([timestamp])
+  @@index([action])
+}
+
+// Audit trail for compliance
+model AuditTrail {
+  id            String    @id @default(uuid())
+  eventType     String
+  description   String
+  payload       Json
+  
+  // Source
+  sourceIp      String?
+  userAgent     String?
+  userId        String?
+  
+  // Metadata
+  recordedAt    DateTime  @default(now())
+  
+  @@index([eventType])
+  @@index([recordedAt])
+  @@index([userId])
+}
