@@ -1,48 +1,60 @@
-                                 Apache License
-                           Version 2.0, January 2004
-                        http://www.apache.org/licenses/
+GRANTREADY HUB LICENSE AGREEMENT
+Version 1.0, December 2024
 
-   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+This Business Source License (this "License") applies to the GrantReady Hub software 
+(the "Software") and any updates or maintenance releases thereof.
 
-   1. Definitions.
+1. LICENSE GRANT
 
-      "License" shall mean the terms and conditions for use, reproduction,
-      and distribution as defined by Sections 1 through 9 of this document.
+Subject to the terms of this License, the Licensor hereby grants you a 
+non-exclusive, worldwide, non-transferable, non-sublicensable license to:
 
-      "Licensor" shall mean the copyright owner or entity authorized by
-      the copyright owner that is granting the License.
+a) Use the Software for internal business purposes only.
+b) Deploy the Software to provide services to your own organization.
+c) Modify the Software for your own internal use.
 
-      "Legal Entity" shall mean the union of the acting entity and all
-      other entities that control, are controlled by, or are under common
-      control with that entity. For the purposes of this definition,
-      "control" means (i) the power, direct or indirect, to cause the
-      direction or management of such entity, whether by contract or
-      otherwise, or (ii) ownership of fifty percent (50%) or more of the
-      outstanding shares, or (iii) beneficial ownership of such entity.
+2. RESTRICTIONS
 
-      "You" (or "Your") shall mean an individual or Legal Entity
-      exercising permissions granted by this License.
+You may not, without prior written consent from GrantReady, Inc.:
 
-      "Source" form shall mean the preferred form for making modifications,
-      including but not limited to software source code, documentation
-      source, and configuration files.
+a) Use the Software to provide a commercial hosting or SaaS service to third parties.
+b) Resell, sublicense, lease, or distribute the Software to third parties.
+c) Use the Software in any way that competes with GrantReady, Inc.'s commercial offerings.
 
-      "Object" form shall mean any form resulting from mechanical
-      transformation or translation of a Source form, including but
-      not limited to compiled object code, generated documentation,
-      and conversions to other media types.
+3. COMMERCIAL USE LICENSE
 
-      "Work" shall mean the work of authorship, whether in Source or
-      Object form, made available under the License, as indicated by a
-      copyright notice that is included in or attached to the work
-      (an example is provided in the Appendix below).
+For commercial use beyond the scope of Section 1, a commercial license must be 
+obtained from GrantReady, Inc. Commercial use includes but is not limited to:
 
-      "Derivative Works" shall mean any work, whether in Source or Object
-      form, that is based on (or derived from) the Work and for which the
-      editorial revisions, annotations, elaborations, or other modifications
-      represent, as a whole, an original work of authorship. For the purposes
-      of this License, Derivative Works shall not include works that remain
-      separable from, or merely link (or bind by name) to the interfaces of,
+- Offering the Software as a service to external customers
+- Integrating the Software into a commercial product
+- Using the Software in a service bureau or application service provider context
+
+4. GOVERNMENT USE
+
+Government entities may use the Software under the terms of this License for 
+internal operations. For deployment in government cloud environments or 
+citizen-facing services, a government license must be obtained.
+
+5. WARRANTY AND LIABILITY
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND. IN NO EVENT 
+SHALL THE LICENSOR BE LIABLE FOR ANY CLAIM ARISING FROM USE OF THE SOFTWARE.
+
+6. TERM AND TERMINATION
+
+This License is effective until terminated. Your rights under this License 
+will terminate automatically without notice if you fail to comply with any term.
+
+---
+
+License Choice Rationale:
+The Business Source License (BSL) is selected because:
+1. It allows inspection and modification for internal use
+2. It prevents commercial competitors from free-riding
+3. It permits government and compliance-driven organizations to use the software internally
+4. It provides a clear path to commercial licensing for SaaS providers
+5. It protects the sustainable development of the project      separable from, or merely link (or bind by name) to the interfaces of,
       the Work and Derivative Works thereof.
 
       "Contribution" shall mean any work of authorship, including
