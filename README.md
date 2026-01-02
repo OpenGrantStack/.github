@@ -201,7 +201,7 @@ Contributions are welcome from authorized partners and customers. Please review 
 
 ---
 
-© 2024 GrantReady, Inc. All rights reserved.
+© 2026 GrantReady, Inc. All rights reserved.
 ---
 
 ## 🧠 Design Principles
