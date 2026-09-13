@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GrantProgram",
+  "type": "object",
+  "required": [
+    "id",
+    "organization",
+    "program",
+    "entity_types",
+    "geographic_focus",
+    "industry_focus",
+    "grant_range",
+    "description",
+    "website"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the grant program"
+    },
+    "organization": {
+      "type": "string",
+      "description": "Name of the granting organization"
+    },
+    "program": {
+      "type": "string",
+      "description": "Name of the specific grant program"
+    },
+    "entity_types": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Eligible entity types (e.g., 501(c)(3), For-profit)"
+    },
+    "geographic_focus": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Geographic regions where applicants must be located"
+    },
+    "industry_focus": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Industries or focus areas the grant supports"
+    },
+    "grant_range": {
+      "type": "object",
+      "required": ["min", "max", "currency"],
+      "properties": {
+        "min": { "type": "number" },
+        "max": { "type": "number" },
+        "currency": { "type": "string" }
+      }
+    },
+    "description": {
+      "type": "string",
+      "description": "Short description of the grant program"
+    },
+    "website": {
+      "type": "string",
+      "format": "uri",
+      "description": "Official website for more information"
+    },
+    "deadline": {
+      "type": "string",
+      "description": "Application deadline or 'Rolling'/'Varies'"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional eligibility notes or caveats"
+    }
+  }
+}
