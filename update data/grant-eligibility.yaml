@@ -1,0 +1,210 @@
+- id: wells-fargo-foundation
+  organization: Wells Fargo Foundation
+  program: Community Giving
+  entity_types:
+    - 501(c)(3)
+  geographic_focus:
+    - United States
+  industry_focus:
+    - Housing Affordability
+    - Small Business
+    - Financial Health
+  grant_range:
+    min: 10000
+    max: 200000
+    currency: USD
+  description: >-
+    Supports nonprofits focused on housing affordability, small business growth,
+    and financial health.
+  website: https://www.wellsfargo.com/about/corporate-responsibility/community-giving/
+  deadline: Varies
+  notes: By invitation or online application depending on program.
+
+- id: jpmorgan-chase-foundation
+  organization: JPMorgan Chase Foundation
+  program: Economic Opportunity
+  entity_types:
+    - 501(c)(3)
+  geographic_focus:
+    - United States
+    - Global
+  industry_focus:
+    - Economic Opportunity
+    - Community Development
+  grant_range:
+    min: 25000
+    max: 200000
+    currency: USD
+  description: >-
+    Invests in nonprofits that create economic opportunity and strengthen communities.
+  website: https://www.jpmorganchase.com/impact/our-approach
+  deadline: Rolling
+  notes: Focus on workforce development, small business, and financial health.
+
+- id: google-org
+  organization: Google.org
+  program: Global Giving
+  entity_types:
+    - 501(c)(3)
+    - For-profit social enterprise
+  geographic_focus:
+    - Global
+  industry_focus:
+    - Education
+    - Economic Opportunity
+    - Inclusion
+  grant_range:
+    min: 50000
+    max: 2000000
+    currency: USD
+  description: >-
+    Supports organizations using technology to solve global challenges.
+  website: https://www.google.org/
+  deadline: Varies
+  notes: Often includes in-kind support and technical assistance.
+
+- id: walmart-local-community-grants
+  organization: Walmart Foundation
+  program: Local Community Grants
+  entity_types:
+    - 501(c)(3)
+    - Schools
+    - Government agencies
+    - Faith-based organizations
+  geographic_focus:
+    - United States
+  industry_focus:
+    - Community Improvement
+    - Education
+    - Health
+  grant_range:
+    min: 250
+    max: 5000
+    currency: USD
+  description: >-
+    Provides small grants to local organizations for community-focused projects.
+  website: https://walmart.org/how-we-give/local-community-grants
+  deadline: Rolling
+  notes: Must serve the local community where a Walmart store is located.
+
+- id: sbir-sttr
+  organization: U.S. Small Business Administration
+  program: SBIR/STTR
+  entity_types:
+    - For-profit small business
+  geographic_focus:
+    - United States
+  industry_focus:
+    - R&D
+    - Technology
+    - Science
+  grant_range:
+    min: 50000
+    max: 1500000
+    currency: USD
+  description: >-
+    Federal grants for small businesses to conduct research and development with
+    commercialization potential.
+  website: https://www.sbir.gov/
+  deadline: Varies by agency
+  notes: Must be US-owned and operated, under 500 employees.
+
+- id: hello-alice
+  organization: Hello Alice
+  program: Small Business Grants
+  entity_types:
+    - For-profit small business
+  geographic_focus:
+    - United States
+  industry_focus:
+    - Underserved Entrepreneurs
+    - Small Business
+  grant_range:
+    min: 5000
+    max: 20000
+    currency: USD
+  description: >-
+    Partners with corporations to provide grants to diverse small business owners.
+  website: https://helloalice.com/grants/
+  deadline: Varies
+  notes: Partners include eBay, FedEx, Toast, PepsiCo, DoorDash.
+
+- id: nc-idea
+  organization: NC IDEA
+  program: NC IDEA SEED
+  entity_types:
+    - For-profit startup
+  geographic_focus:
+    - North Carolina, USA
+  industry_focus:
+    - Technology
+    - Innovation
+  grant_range:
+    min: 10000
+    max: 50000
+    currency: USD
+  description: >-
+    Provides non-dilutive grants to early-stage North Carolina startups.
+  website: https://ncidea.org/
+  deadline: Bi-annual
+  notes: Must be a North Carolina-based company.
+
+- id: massventures-start
+  organization: MassVentures
+  program: START Grant
+  entity_types:
+    - For-profit technology startup
+  geographic_focus:
+    - Massachusetts, USA
+  industry_focus:
+    - Technology
+    - Innovation
+  grant_range:
+    min: 100000
+    max: 500000
+    currency: USD
+  description: >-
+    Helps Massachusetts-based technology startups commercialize their innovations.
+  website: https://massventures.com/start/
+  deadline: Rolling
+  notes: Pre-revenue or early-stage companies.
+
+- id: ai-grant
+  organization: AI Grant
+  program: AI Grant
+  entity_types:
+    - For-profit startup
+  geographic_focus:
+    - Global
+  industry_focus:
+    - Artificial Intelligence
+  grant_range:
+    min: 0
+    max: 0
+    currency: USD
+  description: >-
+    Seed-stage funding and support for AI-focused startups.
+  website: https://aigrant.org/
+  deadline: Varies
+  notes: Check website for current grant amounts and terms.
+
+- id: citi-foundation
+  organization: Citi Foundation
+  program: Community Progress Makers
+  entity_types:
+    - 501(c)(3)
+  geographic_focus:
+    - United States
+    - Global
+  industry_focus:
+    - Financial Inclusion
+    - Youth Economic Opportunities
+  grant_range:
+    min: 0
+    max: 0
+    currency: USD
+  description: >-
+    Supports nonprofits that promote financial inclusion and youth economic opportunities.
+  website: https://www.citifoundation.com/
+  deadline: Varies
+  notes: Grant amounts vary by program.
