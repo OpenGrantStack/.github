@@ -497,3 +497,13 @@ OpenGrantStack is evolving.
 Expect new tools, deeper integrations, and stronger standards over time.
 
 Build openly. Govern transparently. Measure impact.
+
+
+
+## Validation
+
+To validate the JSON data against the schema:
+
+```bash
+npm install
+npm run validate
