@@ -1,3 +1,42 @@
+# OpenGrantStack – Grant Eligibility Data
+
+This repository contains structured data about grant programs and their eligibility criteria.
+
+## Files
+
+- `data/grant-eligibility.json` – JSON list of grant programs.
+- `data/grant-eligibility.yaml` – YAML version of the same data.
+- `schemas/grant-program.schema.json` – JSON Schema for validating entries.
+
+## Data Model
+
+Each grant program entry includes:
+
+| Field | Description |
+|-------|-------------|
+| `id` | Unique identifier |
+| `organization` | Grantmaking organization |
+| `program` | Specific grant program name |
+| `entity_types` | Eligible applicant types (e.g., 501(c)(3), For-profit) |
+| `geographic_focus` | Geographic eligibility |
+| `industry_focus` | Thematic or industry focus |
+| `grant_range` | Min/max funding and currency |
+| `description` | Short summary |
+| `website` | Official link |
+| `deadline` | Application deadline |
+| `notes` | Additional eligibility details |
+
+## Contributing
+
+1. Add new entries to both `grant-eligibility.json` and `grant-eligibility.yaml`.
+2. Validate against `schemas/grant-program.schema.json`.
+3. Open a pull request.
+
+## License
+
+MIT (or your preferred open-source license).
+
+
 # OpenGrantStack
 
 **Open infrastructure for transparent, auditable, community-driven grantmaking.**
