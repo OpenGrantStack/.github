@@ -1,0 +1,25 @@
+- id: scala-sovereign-tech-fund
+  organization: Sovereign Tech Agency (via Scala Center)
+  program: Sovereign Tech Fund — Scala
+  entity_types:
+    - Scala Center
+    - Open-source maintainer
+  geographic_focus:
+    - Global
+  industry_focus:
+    - Scala language
+    - Compiler and standard library
+    - Developer experience
+  grant_range:
+    min: 0
+    max: 377300
+    currency: EUR
+  description: >-
+    Two-year investment to strengthen Scala's long-term security, maintenance,
+    and developer experience. Covers security audit, scoverage improvements,
+    core library maintenance, and documentation modernization.
+  website: https://scala-lang.org/blog/2026/01/27/sta-invests-in-scala.html
+  deadline: N/A (already awarded)
+  notes: >-
+    Funded by German Federal Ministry for Digital Transformation. Part of the
+    Sovereign Tech Fund's €34M investment across 95 critical technology projects.
