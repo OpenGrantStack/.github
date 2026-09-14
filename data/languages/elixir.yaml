@@ -1,0 +1,24 @@
+- id: eef-stipend
+  organization: Erlang Ecosystem Foundation
+  program: EEF Development Stipends
+  entity_types:
+    - Individual developer
+    - Open-source contributor
+  geographic_focus:
+    - Global
+  industry_focus:
+    - Elixir
+    - Erlang
+    - BEAM ecosystem
+  grant_range:
+    min: 0
+    max: 0
+    currency: USD
+  description: >-
+    Stipends awarded to support key development milestones for open-source
+    projects in the Elixir/Erlang ecosystem.
+  website: https://erlef.org/
+  deadline: Rolling
+  notes: >-
+    Recent example: Hologram awarded EEF stipend for development milestones
+    (January 2026).
