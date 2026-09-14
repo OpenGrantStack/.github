@@ -1,0 +1,23 @@
+- id: crystal-sponsors
+  organization: Crystal Language
+  program: Corporate Sponsorship
+  entity_types:
+    - Corporation
+  geographic_focus:
+    - Global
+  industry_focus:
+    - Crystal language
+    - Compiler development
+  grant_range:
+    min: 0
+    max: 0
+    currency: USD
+  description: >-
+    Crystal is funded by corporate sponsors including 84codes (€22,000/month
+    since 2018) and Manas.Tech ($5,000/month since 2009), plus individual
+    backers via OpenCollective.
+  website: https://next.crystal-lang.org/sponsors/
+  deadline: Rolling
+  notes: >-
+    Total all-time corporate funding exceeds $2.4M. Received $15,000 from
+    FLOSS/fund Tranche 2. Core team contact: crystal@manas.tech.
