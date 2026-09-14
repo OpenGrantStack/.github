@@ -1,0 +1,24 @@
+- id: standard-cpp-foundation
+  organization: Standard C++ Foundation
+  program: WG21 Financial Assistance & Proposal Grants
+  entity_types:
+    - Committee expert
+    - WG21 participant
+  geographic_focus:
+    - Global
+  industry_focus:
+    - C++ standardization
+    - WG21 proposals
+  grant_range:
+    min: 0
+    max: 0
+    currency: USD
+  description: >-
+    Financial travel assistance for ISO C++ expert participants whose proposals
+    have been encouraged by WG21 but who would otherwise be unable to attend.
+    Also provides grants to progress WG21 proposals.
+  website: https://isocpp.org/
+  deadline: Rolling (tied to WG21 meetings)
+  notes: >-
+    Funded primarily through CppCon proceeds and sponsor members. Foundation
+    has helped pay for WG21 meeting hosting.
