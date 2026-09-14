@@ -1,0 +1,24 @@
+- id: gleam-sponsorship
+  organization: Gleam Project
+  program: Project Sponsorship
+  entity_types:
+    - Individual sponsor
+    - Corporate sponsor
+  geographic_focus:
+    - Global
+  industry_focus:
+    - Gleam language
+    - Erlang/BEAM ecosystem
+  grant_range:
+    min: 1
+    max: 0
+    currency: USD
+  description: >-
+    Gleam is funded entirely by sponsors. Contributions fund core team salaries,
+    contractors, and package infrastructure. 100% of personal GitHub Sponsors
+    contributions go to development.
+  website: https://gleam.run/sponsor/
+  deadline: Rolling
+  notes: >-
+    Received $15,000 from FLOSS/fund Tranche 2 (October 2025). Lambda is a
+    corporate sponsor. No minimum sponsorship amount.
