@@ -1,0 +1,48 @@
+- id: ahrefs-ocaml-grant
+  organization: Ahrefs
+  program: Ahrefs Grant Program for OCaml
+  entity_types:
+    - Individual developer
+    - Team
+    - Organization
+  geographic_focus:
+    - Global
+  industry_focus:
+    - OCaml ecosystem
+    - Compiler and core libraries
+    - Developer tooling
+    - Education
+  grant_range:
+    min: 0
+    max: 50000
+    currency: USD
+  description: >-
+    Supports meaningful, practical improvements to the OCaml ecosystem, including
+    new tools, libraries, infrastructure, education, and long-term maintenance.
+  website: https://discuss.ocaml.org/t/ahrefs-grant-program-for-ocaml/17604
+  deadline: January 20, 2026 (inaugural cycle)
+  notes: >-
+    Projects must use an open-source license. Both small and large initiatives
+    welcome. Prioritizes lasting impact and maintained projects.
+
+- id: ocaml-security-grant
+  organization: OCaml Software Foundation
+  program: OCaml Security Grant
+  entity_types:
+    - Individual developer
+    - Team
+  geographic_focus:
+    - Global
+  industry_focus:
+    - OCaml security
+    - Compiler hardening
+    - Ecosystem security
+  grant_range:
+    min: 0
+    max: 100000
+    currency: EUR
+  description: >-
+    Grants for projects that strengthen the OCaml ecosystem's security.
+  website: https://ocaml.org/
+  deadline: Rolling / periodic
+  notes: Up to €100,000 available. Partnership with OCSF.
