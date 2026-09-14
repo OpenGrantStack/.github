@@ -1,0 +1,25 @@
+- id: haskell-foundation-sponsorship
+  organization: Haskell Foundation
+  program: Corporate Sponsorship
+  entity_types:
+    - Corporation
+    - Individual donor
+  geographic_focus:
+    - Global
+  industry_focus:
+    - Haskell language
+    - GHC compiler
+    - Toolchain
+  grant_range:
+    min: 15000
+    max: 100000
+    currency: USD
+  description: >-
+    Sponsorship tiers (Bronze $15k+, Silver $35k+, Gold $100k+) support Haskell
+    Foundation initiatives including toolchain maintenance, education, and
+    ecosystem development.
+  website: https://haskell.foundation/donations/
+  deadline: Rolling
+  notes: >-
+    Sponsors gain Advisory Board participation. Foundation has also applied for
+    NSF POSE grants. 2026 roadmap notes funding gaps for sustained core dev.
