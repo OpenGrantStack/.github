@@ -1,0 +1,26 @@
+- id: clojurists-together
+  organization: Clojurists Together
+  program: Open Source Funding
+  entity_types:
+    - Individual maintainer
+    - Open-source developer
+  geographic_focus:
+    - Global
+  industry_focus:
+    - Clojure ecosystem
+    - ClojureScript
+    - Libraries and tooling
+  grant_range:
+    min: 1500
+    max: 90000
+    currency: USD
+  description: >-
+    Funds critical Clojure open-source software. Maintainers apply for funding
+    and get paid to work on their projects in three-month cycles. Also provides
+    annual grants.
+  website: https://www.clojuriststogether.org/
+  deadline: Quarterly cycles (e.g., Q2 2026 applications close March 19)
+  notes: >-
+    Since 2018 has awarded over $1.2M to 87 developers across 154+ projects.
+    2026 annual funding selected 5 developers at $1.5k/month for 12 months
+    ($90k total).
