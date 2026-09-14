@@ -1,0 +1,25 @@
+- id: rust-foundation-mir
+  organization: Rust Foundation
+  program: Maintainers in Residence (MiR)
+  entity_types:
+    - Individual maintainer
+    - Open-source contributor
+  geographic_focus:
+    - Global
+  industry_focus:
+    - Rust language
+    - Compiler development
+    - Toolchain maintenance
+  grant_range:
+    min: 0
+    max: 0
+    currency: USD
+  description: >-
+    Long-term funding for Rust maintainers. MiRs split time between team-guided
+    priorities and their own project work. Funded through the Rust Foundation
+    Maintainers Fund (RFMF).
+  website: https://rustfoundation.org/
+  deadline: Rolling / periodic cohorts
+  notes: >-
+    RFMF raised $350,000 in first round from Google, AWS, OpenAI, and the Rust
+    Project Leadership Council. Also supports Maintainer Grantee roles.
