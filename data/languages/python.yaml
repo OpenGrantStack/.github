@@ -1,0 +1,25 @@
+- id: psf-grants-program
+  organization: Python Software Foundation
+  program: PSF Grants Program
+  entity_types:
+    - Conference organizer
+    - Workshop organizer
+    - Community group
+  geographic_focus:
+    - Global
+  industry_focus:
+    - Python community
+    - Conferences and workshops
+  grant_range:
+    min: 1500
+    max: 2000
+    currency: USD
+  description: >-
+    Funding for Python conferences and workshops scheduled December 2026 –
+    April 2027. Conferences capped at $2,000; workshops at $1,500.
+  website: https://www.python.org/psf/grants/
+  deadline: August 4–25, 2026 (AoE)
+  notes: >-
+    2026 round capped at $90,000 total budget. Conference must have at least 60%
+    Python content. Workshops must have 6+ hours/day instruction. PSF also
+    received $1.5M from Anthropic in January 2026.
