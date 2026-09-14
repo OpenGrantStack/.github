@@ -1,0 +1,45 @@
+- id: swift-student-challenge
+  organization: Apple
+  program: Swift Student Challenge
+  entity_types:
+    - Student
+  geographic_focus:
+    - Global
+  industry_focus:
+    - Swift
+    - App development
+    - Creativity and social impact
+  grant_range:
+    min: 0
+    max: 0
+    currency: USD
+  description: >-
+    Annual challenge inviting student developers worldwide to design Swift-based
+    app playgrounds demonstrating creativity, social impact, inclusivity, or
+    technical skill.
+  website: https://developer.apple.com/swift-student-challenge/
+  deadline: Annual (2026 submissions opened February 2026)
+  notes: >-
+    Apple recognizes 350 winners. Swift also accepts GitHub Sponsors for the
+    open-source project.
+
+- id: swift-github-sponsors
+  organization: Swift Project
+  program: GitHub Sponsors
+  entity_types:
+    - Individual contributor
+  geographic_focus:
+    - Global
+  industry_focus:
+    - Swift language
+    - Swift toolchain
+  grant_range:
+    min: 0
+    max: 0
+    currency: USD
+  description: >-
+    Apple accepts GitHub Sponsorships to support the Swift project's ongoing
+    development.
+  website: https://github.com/sponsors/apple
+  deadline: Rolling
+  notes: Monthly sponsorship tiers with rewards.
