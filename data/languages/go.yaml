@@ -1,0 +1,26 @@
+- id: gno-land-grants
+  organization: Gno.land
+  program: Gno.land Grants Program
+  entity_types:
+    - Individual developer
+    - Team
+    - Researcher
+  geographic_focus:
+    - Global
+  industry_focus:
+    - Go
+    - Blockchain
+    - Smart contracts (Gno)
+  grant_range:
+    min: 0
+    max: 0
+    currency: USD
+  description: >-
+    Financial support for developers contributing to gno.land, a blockchain
+    platform written in Go. Focus on project-based grants with milestones,
+    deliverables, and timelines.
+  website: https://github.com/gnolang/grants
+  deadline: Rolling
+  notes: >-
+    Ideal for Go developers passionate about open-source and blockchain.
+    Proposals submitted via GitHub PR with template.
