@@ -27,3 +27,30 @@ This directory contains grant programs specifically relevant to developers worki
 | **C++** | `cpp.yaml` | Standard C++ Foundation |
 | **Gleam** | `gleam.yaml` | Project sponsorship |
 | **Crystal** | `crystal.yaml` | Corporate sponsors |
+
+## Validation
+
+```bash
+npm run validate:languages
+npm run merge
+```
+
+---
+
+## Verification Commands
+
+After adding all files, run these to confirm everything works:
+
+```bash
+# Install deps
+npm install
+
+# Validate main + language data
+npm run validate:all
+
+# Merge into one file
+npm run merge
+
+# Or do everything at once
+npm run build
+```
