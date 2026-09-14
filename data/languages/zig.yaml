@@ -1,0 +1,25 @@
+- id: zig-software-foundation
+  organization: Zig Software Foundation
+  program: Core Developer Funding
+  entity_types:
+    - Individual contributor
+    - Open-source developer
+  geographic_focus:
+    - Global
+  industry_focus:
+    - Zig language
+    - Compiler development
+    - Standard library
+  grant_range:
+    min: 0
+    max: 0
+    currency: USD
+  description: >-
+    ZSF is a 501(c)(3) nonprofit that pays core contributors to work on Zig
+    full-time, with the goal of reaching 1.0. Funded entirely by donations and
+    corporate sponsors.
+  website: https://ziglang.org/zsf/
+  deadline: N/A
+  notes: >-
+    2026 budget reported at ~$670K. Mitchell Hashimoto donated $300K. Core
+    contributors receive competitive salaries.
