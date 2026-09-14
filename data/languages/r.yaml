@@ -1,0 +1,28 @@
+- id: r-consortium-isc-grants
+  organization: R Consortium
+  program: ISC Technical Grants
+  entity_types:
+    - Individual developer
+    - Package maintainer
+    - Researcher
+    - Team
+  geographic_focus:
+    - Global
+  industry_focus:
+    - R ecosystem
+    - Statistical computing
+    - Reproducible research
+    - Package infrastructure
+  grant_range:
+    min: 0
+    max: 0
+    currency: USD
+  description: >-
+    Funds projects that strengthen R's technical and social infrastructure,
+    including open-source development, tools, and community initiatives that
+    benefit R users and package developers.
+  website: https://r-consortium.org/
+  deadline: Two cycles per year (first round announced July; second round opens September)
+  notes: >-
+    Successful proposals show broad impact, focused scope, clear deliverables.
+    Recent grants ranged from $7,000–$10,000 per project.
